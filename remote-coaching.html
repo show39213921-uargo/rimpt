@@ -67,7 +67,9 @@
   .flow-image-wrap{
     position:relative; border:1px solid var(--line); background:#0d0d0d;
     aspect-ratio:9/16; display:flex; align-items:center; justify-content:center; overflow:hidden;
+    touch-action:pan-y; cursor:grab;
   }
+  .flow-image-wrap.dragging{cursor:grabbing}
   .flow-image{width:100%;height:100%;object-fit:contain;background:#0d0d0d}
   .flow-empty{
     position:absolute; inset:0; display:none; align-items:center; justify-content:center;
@@ -148,8 +150,8 @@
   </section>
 
   <section>
-    <h2>AS-IS / TO-BE 프로세스 보기</h2>
-    <p class="lead">원격 코칭이 어떻게 운영되는지, 현재 메신저 기반(AS-IS)과 시스템 구축 후(TO-BE)를 이미지 단계별로 비교해서 확인할 수 있습니다.</p>
+    <h2>현재 운영 방식과 곧 제공될 시스템 안내</h2>
+    <p class="lead">지금은 메신저 중심으로 꼼꼼하게 관리하고 있으며, 더 편리한 시스템 기반 코칭도 빠른 시일 내 오픈할 예정입니다. 아래 이미지에서 진행 흐름을 쉽게 확인해보세요.</p>
 
     <div class="flow-slider">
       <div class="flow-top">
@@ -165,6 +167,7 @@
         <div id="flowEmpty" class="flow-empty">이미지를 찾을 수 없습니다.<br>아래 경로에 파일을 넣어주세요:<br><strong>assets/remote-coaching/asis-1.png</strong> 또는 <strong>.../tobe-1.png</strong></div>
       </div>
       <p id="flowCaption" class="flow-caption"></p>
+      <p class="flow-indicator" style="margin-top:.35rem;">이미지를 좌우로 스와이프하면 다음/이전 단계로 이동합니다.</p>
       <div class="flow-controls">
         <button id="flowPrev" class="flow-btn" type="button" aria-label="이전 단계">←</button>
         <div id="flowStep" class="flow-step">1 / 1</div>
@@ -184,13 +187,15 @@
           { src: "assets/remote-coaching/asis-1.png", caption: "AS-IS 1단계: 회원이 메신저로 식단/운동 기록을 전송합니다." },
           { src: "assets/remote-coaching/asis-2.png", caption: "AS-IS 2단계: 트레이너가 수기로 인바디와 운동 상황을 정리합니다." },
           { src: "assets/remote-coaching/asis-3.png", caption: "AS-IS 3단계: 운동 영상 확인 후 채팅으로 자세 교정 피드백을 전달합니다." },
-          { src: "assets/remote-coaching/asis-4.png", caption: "AS-IS 4단계: 하루 요약을 톡으로 전달하고 다음날 목표를 재설정합니다." }
+          { src: "assets/remote-coaching/asis-4.png", caption: "AS-IS 4단계: 하루 요약을 톡으로 전달하고 다음날 목표를 재설정합니다." },
+          { src: "assets/remote-coaching/asis-5.png", caption: "AS-IS 5단계: 주간 결과를 수동 정리해 다음 주 계획으로 연결합니다." }
         ],
         tobe: [
           { src: "assets/remote-coaching/tobe-1.png", caption: "TO-BE 1단계: 시스템에서 식단·운동·인바디 데이터를 자동 수집합니다." },
           { src: "assets/remote-coaching/tobe-2.png", caption: "TO-BE 2단계: 지표 기반으로 개인 맞춤 운동 프로세스가 자동 추천됩니다." },
           { src: "assets/remote-coaching/tobe-3.png", caption: "TO-BE 3단계: 영상 업로드 후 동작별 코칭 포인트가 구조화되어 피드백됩니다." },
-          { src: "assets/remote-coaching/tobe-4.png", caption: "TO-BE 4단계: 일일 리포트와 알림이 자동 발송되어 실행률을 높입니다." }
+          { src: "assets/remote-coaching/tobe-4.png", caption: "TO-BE 4단계: 일일 리포트와 알림이 자동 발송되어 실행률을 높입니다." },
+          { src: "assets/remote-coaching/tobe-5.png", caption: "TO-BE 5단계: 대시보드에서 주간 성과·이탈요인을 분석하고 다음 플랜을 자동 제안합니다." }
         ]
       };
 
@@ -202,6 +207,9 @@
       var indicator = document.getElementById("flowIndicator");
       var empty = document.getElementById("flowEmpty");
       var tabs = document.querySelectorAll(".flow-tab");
+      var wrap = document.querySelector(".flow-image-wrap");
+      var dragStartX = null;
+      var SWIPE_THRESHOLD = 40;
 
       function render() {
         var list = flows[mode] || [];
@@ -234,6 +242,35 @@
       document.getElementById("flowNext").addEventListener("click", function () {
         var len = (flows[mode] || []).length;
         idx = (idx + 1) % len;
+        render();
+      });
+
+      wrap.addEventListener("touchstart", function (e) {
+        if (!e.touches || !e.touches.length) return;
+        dragStartX = e.touches[0].clientX;
+      }, { passive: true });
+      wrap.addEventListener("touchend", function (e) {
+        if (dragStartX === null || !e.changedTouches || !e.changedTouches.length) return;
+        var dx = e.changedTouches[0].clientX - dragStartX;
+        dragStartX = null;
+        if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+        var len = (flows[mode] || []).length;
+        idx = dx < 0 ? (idx + 1) % len : (idx - 1 + len) % len;
+        render();
+      }, { passive: true });
+
+      wrap.addEventListener("mousedown", function (e) {
+        dragStartX = e.clientX;
+        wrap.classList.add("dragging");
+      });
+      window.addEventListener("mouseup", function (e) {
+        if (dragStartX === null) return;
+        var dx = e.clientX - dragStartX;
+        dragStartX = null;
+        wrap.classList.remove("dragging");
+        if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+        var len = (flows[mode] || []).length;
+        idx = dx < 0 ? (idx + 1) % len : (idx - 1 + len) % len;
         render();
       });
 
