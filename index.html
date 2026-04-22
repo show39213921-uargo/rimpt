@@ -3,7 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>이예림 PT — Personal Trainer</title>
+<title>이예림 PT — Personal Trainer | 수원 퍼스널트레이닝</title>
+<meta name="description" content="수원 힐스테이트 푸르지오 퍼스널 트레이너 이예림. 체지방 감량, 근력·체형 교정, 식단 컨설팅. 첫 상담 무료, 1:1·2:1 PT.">
+<meta name="keywords" content="수원 PT,퍼스널트레이너,이예림,힐스테이트 푸르지오,다이어트 PT,체형교정,1대1 PT">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Lee Yerim Personal Training">
+<link rel="canonical" href="https://rim-pt.com/">
+<meta name="theme-color" content="#080808">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="이예림 PT">
+<meta property="og:title" content="이예림 PT — Personal Trainer | 수원">
+<meta property="og:description" content="몸과 습관을 함께 바꾸는 수원 퍼스널 트레이닝. 첫 상담 무료.">
+<meta property="og:url" content="https://rim-pt.com/">
+<meta property="og:image" content="https://rim-pt.com/assets/%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%84%88/trainer-1.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="이예림 PT — Personal Trainer">
+<meta name="twitter:description" content="수원 퍼스널 트레이닝 · 첫 상담 무료">
+<meta name="twitter:image" content="https://rim-pt.com/assets/%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%84%88/trainer-1.jpeg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "이예림 PT",
+  "alternateName": "Lee Yerim Personal Training",
+  "url": "https://rim-pt.com/",
+  "image": "https://rim-pt.com/assets/%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%84%88/trainer-1.jpeg",
+  "description": "수원 퍼스널 트레이닝. 체지방 감량, 근력·체형 교정, 식단 컨설팅. 첫 상담 무료.",
+  "telephone": "+82-31-233-8622",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "힐스테이트 푸르지오 수원 2단지 커뮤니티센터",
+    "addressLocality": "수원시",
+    "addressRegion": "경기도",
+    "addressCountry": "KR"
+  },
+  "priceRange": "₩₩"
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -37,23 +74,34 @@
     position: fixed; top:0; left:0; right:0; z-index:999;
     max-width: 480px; margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
+    gap:0.6rem;
     padding: 1rem 1.4rem;
     background: rgba(8,8,8,0.97);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     transition: padding 0.3s;
   }
-  .nav-logo {
+  .nav-logo-btn {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; font-weight:300;
-    letter-spacing: 0.22em; color: var(--accent);
+    font-size: 1.05rem; font-weight:300;
+    letter-spacing: 0.18em; color: var(--accent);
     text-transform: uppercase;
+    background:none; border:none; cursor:pointer; padding:0;
+    text-align:left; max-width:52vw;
   }
+  .nav-actions { display:flex; align-items:center; gap:0.5rem; flex-shrink:0; }
+  .nav-link-btn {
+    background:none; border:none; color:var(--muted);
+    font-family:'Noto Sans KR', sans-serif;
+    font-size:0.62rem; letter-spacing:0.06em; cursor:pointer;
+    padding:0.35rem 0.2rem; white-space:nowrap;
+  }
+  .nav-link-btn:active { color:var(--accent2); }
   .nav-cta {
     background: var(--accent); color: var(--dark);
-    border: none; padding: 0.55rem 1.1rem;
+    border: none; padding: 0.55rem 0.85rem;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+    font-size: 0.65rem; letter-spacing:0.08em; text-transform:uppercase;
     cursor:pointer; font-weight:700;
   }
 
@@ -109,8 +157,13 @@
   .hero-title em { font-style:italic; color: var(--accent2); white-space:nowrap; font-size: clamp(2.2rem, 10.5vw, 4rem); }
   .hero-desc {
     font-size:0.84rem; line-height:1.85;
-    color:var(--muted); margin-bottom:2rem;
+    color:var(--muted); margin-bottom:1rem;
     font-weight:300; max-width:320px;
+  }
+  .hero-trust {
+    font-size:0.7rem; line-height:1.65; color:var(--muted2);
+    max-width:320px; margin-bottom:1.6rem; font-weight:300;
+    padding-left:0.55rem; border-left:2px solid var(--border-light);
   }
   .hero-btns { display:flex; flex-direction:column; gap:0.7rem; margin-bottom:0; }
   .btn-primary {
@@ -261,12 +314,18 @@
   }
   .about-desc { color:var(--muted); line-height:1.9; font-size:0.87rem; font-weight:300; margin-bottom:1.4rem; }
   .cert-list { display:flex; flex-direction:column; gap:0; margin-top:1.5rem; }
+  .cert-group { margin-top:1.35rem; }
+  .cert-group:first-child { margin-top:0; }
+  .cert-group-title {
+    font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--accent2); font-weight:500; margin-bottom:0.5rem;
+  }
+  .cert-group .cert-item:first-of-type { border-top:1px solid var(--border); }
   .cert-item {
     display:flex; align-items:flex-start; gap:0.9rem;
     font-size:0.8rem; color:var(--muted); font-weight:300;
     padding:0.8rem 0; border-bottom:1px solid var(--border);
   }
-  .cert-item:first-child { border-top:1px solid var(--border); }
   .cert-num {
     font-family:'Cormorant Garamond', serif;
     font-size:0.85rem; color:var(--muted2); min-width:1.4rem; flex-shrink:0; padding-top:1px;
@@ -288,6 +347,11 @@
   }
   .ba-tab:last-child { border-right:none; }
   .ba-tab.active { background:var(--accent); color:var(--dark); font-weight:700; }
+  .ba-notice {
+    font-size:0.68rem; line-height:1.65; color:var(--muted2);
+    background:rgba(255,255,255,0.03); border:1px solid var(--border);
+    padding:0.75rem 1rem; margin-bottom:1.2rem; font-weight:300;
+  }
   .ba-cases { display:flex; flex-direction:column; gap:1px; background:var(--border); }
   .ba-card {
     background:var(--card); overflow:hidden;
@@ -455,7 +519,20 @@
 
   /* ── CONTACT ── */
   .contact { background:var(--mid); }
-  .contact-desc { color:var(--muted); line-height:1.9; margin-bottom:2rem; font-size:0.87rem; font-weight:300; }
+  .contact-desc { color:var(--muted); line-height:1.9; margin-bottom:1.25rem; font-size:0.87rem; font-weight:300; }
+  .contact-steps {
+    display:flex; flex-direction:column; gap:0.65rem;
+    margin-bottom:1.75rem; padding:1rem 1.1rem;
+    border:1px solid var(--border); background:var(--darker);
+  }
+  .contact-step { display:flex; align-items:flex-start; gap:0.75rem; }
+  .contact-step-num {
+    font-family:'Cormorant Garamond', serif; font-size:0.95rem;
+    color:var(--accent2); min-width:1.35rem; line-height:1.4;
+  }
+  .contact-step-txt {
+    font-size:0.78rem; color:var(--muted); line-height:1.55; font-weight:300;
+  }
   .contact-details { display:flex; flex-direction:column; gap:0; border-top:1px solid var(--border); margin-bottom:2.5rem; }
   .contact-item {
     display:flex; align-items:flex-start; gap:1rem;
@@ -499,6 +576,11 @@
   .form-field textarea:focus { border-color:var(--accent2); }
   .form-field textarea { resize:vertical; min-height:100px; }
   .form-field select option { background:var(--darker); }
+  .form-privacy {
+    font-size:0.65rem; line-height:1.55; color:var(--muted2);
+    font-weight:300; margin:-0.25rem 0 0.25rem;
+  }
+  .form-privacy strong { color:var(--muted); font-weight:500; }
   .form-submit {
     background:var(--accent); color:var(--dark);
     border:none; padding:1.1rem; cursor:pointer;
@@ -554,8 +636,11 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <div class="nav-logo">Lee Ye Rim</div>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담</button>
+  <button type="button" class="nav-logo-btn" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" aria-label="맨 위로">Lee Ye Rim</button>
+  <div class="nav-actions">
+    <button type="button" class="nav-link-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">소개·이력</button>
+    <button type="button" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -569,6 +654,7 @@
       몸과 마음을<br><em>건강하게 바꾸는</em><br>트레이너
     </h1>
     <p class="hero-desc">운동 습관부터 식단 관리까지, 체계적인 방식으로 회원님만의 맞춤 트레이닝을 제공합니다.</p>
+    <p class="hero-trust">사진·후기는 회원 동의 후에만 게시합니다. 부담 없이 상담부터 편하게 요청해 주세요.</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">변화 결과 보기</button>
       <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담 신청</button>
@@ -646,19 +732,25 @@
       </div>
       <h2 class="section-title" style="margin-bottom:0;">이예림<br><em style="font-style:italic; color:var(--accent2);">Lee Yerim</em></h2>
     </div>
-    <p class="about-desc">안녕하세요, 퍼스널 트레이너 이예림입니다. 저는 9년간 많은 회원님들과 함께 체지방 감량, 근력 강화, 체형 교정 등 다양한 목표를 달성해왔습니다.</p>
-    <p class="about-desc">단순한 운동 지도를 넘어, 식단 컨설팅과 생활 습관까지 함께 진행하여 수업 종료 후에도 지속 가능한 건강한 라이프스타일을 만들어 드립니다.</p>
+    <p class="about-desc">안녕하세요, 퍼스널 트레이너 이예림입니다. 9년간 체지방 감량·근력 강화·체형 교정 등 목표별로 회원님의 몸에 맞는 루틴을 설계해 왔습니다.</p>
+    <p class="about-desc">운동만 반복하는 수업이 아니라, 체성분·생활 패턴을 함께 보고 식단 피드백까지 이어가 수업이 끝난 뒤에도 스스로 관리할 수 있는 습관을 만드는 데 집중합니다.</p>
     <div class="cert-list">
-      <div class="cert-item"><span class="cert-num">01</span>사회체육과 졸업</div>
-      <div class="cert-item"><span class="cert-num">02</span>생활스포츠지도사 2급 (보디빌딩)</div>
-      <div class="cert-item"><span class="cert-num">03</span>체육 교원자격증</div>
-      <div class="cert-item"><span class="cert-num">04</span>사단법인 스포츠마사지 자격증</div>
-      <div class="cert-item"><span class="cert-num">05</span>2018 NABBA WFF NOVICE 스포츠모델 Top10</div>
-      <div class="cert-item"><span class="cert-num">06</span>2019 FITNESS STAR BUCHEON 스포츠모델 3위</div>
-      <div class="cert-item"><span class="cert-num">07</span>2019 FITNESS STAR BUCHEON 비키니 Top10</div>
-      <div class="cert-item"><span class="cert-num">08</span>2019 PCA KOREA 비키니 5위</div>
-      <div class="cert-item"><span class="cert-num">09</span>2019 FITNESS STAR UI WANG 비키니 4위</div>
-      <div class="cert-item"><span class="cert-num">10</span>2019 FITNESS STAR UI WANG 스포츠모델 5위</div>
+      <div class="cert-group">
+        <div class="cert-group-title">학력 · 자격</div>
+        <div class="cert-item"><span class="cert-num">01</span>사회체육과 졸업</div>
+        <div class="cert-item"><span class="cert-num">02</span>생활스포츠지도사 2급 (보디빌딩)</div>
+        <div class="cert-item"><span class="cert-num">03</span>체육 교원자격증</div>
+        <div class="cert-item"><span class="cert-num">04</span>사단법인 스포츠마사지 자격증</div>
+      </div>
+      <div class="cert-group">
+        <div class="cert-group-title">대회 실적</div>
+        <div class="cert-item"><span class="cert-num">05</span>2018 NABBA WFF NOVICE 스포츠모델 Top10</div>
+        <div class="cert-item"><span class="cert-num">06</span>2019 FITNESS STAR BUCHEON 스포츠모델 3위</div>
+        <div class="cert-item"><span class="cert-num">07</span>2019 FITNESS STAR BUCHEON 비키니 Top10</div>
+        <div class="cert-item"><span class="cert-num">08</span>2019 PCA KOREA 비키니 5위</div>
+        <div class="cert-item"><span class="cert-num">09</span>2019 FITNESS STAR UI WANG 비키니 4위</div>
+        <div class="cert-item"><span class="cert-num">10</span>2019 FITNESS STAR UI WANG 스포츠모델 5위</div>
+      </div>
     </div>
   </div>
 </section>
@@ -668,7 +760,8 @@
   <div class="fade-up">
     <div class="section-label">비포앤애프터</div>
     <h2 class="section-title">실제 회원<br>변화 결과</h2>
-    <p style="color:var(--muted); line-height:1.85; margin-bottom:1.8rem; font-size:0.84rem; font-weight:300;">슬라이더를 드래그하여 변화 전후를 확인하세요.</p>
+    <p style="color:var(--muted); line-height:1.85; margin-bottom:1rem; font-size:0.84rem; font-weight:300;">슬라이더를 드래그하여 변화 전후를 비교해 보세요.</p>
+    <p class="ba-notice fade-up">일부 전·후 이미지는 레이아웃 확인용입니다. 실제 회원 변화 사진은 동의를 받은 뒤에만 교체·게시합니다.</p>
   </div>
   <div class="ba-tabs fade-up">
     <button class="ba-tab active" data-filter="all">전체</button>
@@ -759,6 +852,7 @@
   <div class="fade-up">
     <div class="section-label">PT 가격 안내</div>
     <h2 class="section-title">프로그램<br>선택하기</h2>
+    <p style="color:var(--muted);font-size:0.82rem;line-height:1.75;font-weight:300;margin-bottom:1.5rem;">가격은 참고용이며, 첫 상담에서 체력·목표에 맞는 회차와 시간을 함께 조정할 수 있습니다.</p>
   </div>
   <div class="prog-grid">
 
@@ -815,6 +909,7 @@
   <div class="fade-up">
     <div class="section-label">회원 후기</div>
     <h2 class="section-title">진짜 회원들의<br>솔직한 이야기</h2>
+    <p style="color:var(--muted2);font-size:0.72rem;line-height:1.6;font-weight:300;margin:-0.3rem 0 1.2rem;">실제 수업·상담을 바탕으로 한 피드백이며, 노출 범위는 모두 동의를 받은 내용만 사용합니다.</p>
     <div class="reviews-nav">
       <button class="rev-nav-btn" id="rev-prev">←</button>
       <button class="rev-nav-btn" id="rev-next">→</button>
@@ -882,7 +977,12 @@
   <div class="fade-up">
     <div class="section-label">무료 상담 신청</div>
     <h2 class="section-title">지금 바로<br>시작하세요</h2>
-    <p class="contact-desc">첫 상담은 무료입니다. 현재 목표와 고민을 말씀해주시면 최적의 트레이닝 방향을 제안해드립니다.</p>
+    <p class="contact-desc">첫 상담은 무료입니다. 지금 겪는 불편함이나 목표를 알려주시면, 가능한 일정과 맞는 프로그램을 함께 정리해 드립니다.</p>
+    <div class="contact-steps">
+      <div class="contact-step"><span class="contact-step-num">01</span><span class="contact-step-txt">아래 폼 또는 전화·카카오톡으로 연락</span></div>
+      <div class="contact-step"><span class="contact-step-num">02</span><span class="contact-step-txt">통화·문자로 목표·부상 이력·가능 시간 확인</span></div>
+      <div class="contact-step"><span class="contact-step-num">03</span><span class="contact-step-txt">첫 방문 일정과 체험·정규 수업 방향 안내</span></div>
+    </div>
     <div class="contact-details">
       <div class="contact-item">
         <div class="contact-icon">📍</div>
@@ -960,13 +1060,14 @@
       </div>
       <div class="form-field">
         <label>문의 내용 (선택)</label>
-        <textarea id="f-msg" name="message" placeholder="현재 상태나 목표, 궁금한 점을 자유롭게 적어주세요."></textarea>
+        <textarea id="f-msg" name="message" placeholder="예: 허리 통증 여부, 운동 경험, 선호 시간대 등"></textarea>
       </div>
+      <p class="form-privacy">보내주신 이름·연락처 등은 <strong>상담 및 수업 안내</strong>에만 사용하며, 동의 없이 제3자에게 제공하지 않습니다.</p>
       <button type="submit" class="form-submit" id="form-submit-btn">무료 상담 신청하기 →</button>
     </form>
     <div class="form-success" id="form-success">
       신청이 완료되었습니다 ✓<br>
-      <span style="font-size:0.8rem;color:var(--muted);font-weight:300;display:block;margin-top:0.5rem;">24시간 내 연락드리겠습니다.<br>감사합니다.</span>
+      <span style="font-size:0.8rem;color:var(--muted);font-weight:300;display:block;margin-top:0.5rem;">영업일 기준 빠르면 당일, 늦어도 24시간 이내에 연락드립니다. 메일·문자 스팸함도 한 번 확인해 주세요.<br>감사합니다.</span>
     </div>
   </div>
 </section>

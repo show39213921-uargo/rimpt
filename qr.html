@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>이예림 PT | 상담·공유 QR 페이지</title>
+  <meta name="description" content="수원 이예림 PT 소개, 연락처, 상담 동선과 QR 공유를 한 화면에서 확인할 수 있는 페이지입니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="이예림 PT | 상담·공유 QR 페이지">
+  <meta property="og:description" content="전화·카카오톡·홈페이지 진입을 한 번에. 안드로이드 공유하기 지원.">
+  <meta property="og:url" content="https://rim-pt.com/qr.html">
+  <meta property="og:image" content="https://rim-pt.com/assets/%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%84%88/trainer-1.jpeg">
+  <link rel="canonical" href="https://rim-pt.com/qr.html">
+  <style>
+    :root {
+      --bg: #080808;
+      --card: #141414;
+      --line: #262626;
+      --text: #ebebeb;
+      --muted: #8a8a8a;
+      --accent: #ffffff;
+      --sub: #b0b0b0;
+      --kakao: #FEE500;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, "Noto Sans KR", sans-serif;
+      background: radial-gradient(circle at 50% -20%, #1b1b1b, var(--bg) 52%);
+      color: var(--text);
+      min-height: 100dvh;
+      padding: 1.2rem 1rem 2rem;
+    }
+    .wrap { max-width: 480px; margin: 0 auto; }
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.2rem;
+      margin-bottom: 0.9rem;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      color: var(--sub);
+      border: 1px solid #333;
+      border-radius: 999px;
+      padding: 0.25rem 0.58rem;
+      margin-bottom: 0.7rem;
+    }
+    h1 { font-size: 1.28rem; line-height: 1.35; margin-bottom: 0.4rem; }
+    .desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+      margin: 0.8rem 0;
+    }
+    .info {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.72rem;
+      min-height: 76px;
+    }
+    .info .k { font-size: 0.68rem; color: var(--sub); margin-bottom: 0.28rem; }
+    .info .v { font-size: 0.78rem; line-height: 1.45; }
+
+    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-top: 0.65rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 0.9rem 0.7rem;
+      font-weight: 700;
+      font-size: 0.77rem;
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+    }
+    .btn-call { background: #1d1d1d; border-color: #333; color: var(--text); }
+    .btn-kakao { background: var(--kakao); color: #191919; }
+
+    .qr-card {
+      background: #0f0f0f;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 0.9rem;
+    }
+    .qr-title { font-size: 0.9rem; margin-bottom: 0.35rem; }
+    .qr-sub { font-size: 0.74rem; color: var(--muted); margin-bottom: 0.8rem; line-height: 1.5; }
+    .qr-wrap {
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+    #qr {
+      display: block;
+      width: min(62vw, 240px);
+      height: auto;
+    }
+
+    .primary {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.95rem 0.8rem;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.55rem;
+      cursor: pointer;
+      background: var(--accent);
+      color: #111;
+      text-decoration: none;
+      text-align: center;
+    }
+    .secondary {
+      width: 100%;
+      border-radius: 10px;
+      padding: 0.88rem 0.7rem;
+      font-weight: 600;
+      font-size: 0.76rem;
+      border: 1px solid #373737;
+      background: #1a1a1a;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .hint { font-size: 0.68rem; color: var(--muted); margin-top: 0.55rem; }
+    .hint.ok { color: #c6d6a1; }
+
+    .url {
+      margin-top: 0.8rem;
+      font-size: 0.66rem;
+      color: #6f6f6f;
+      word-break: break-all;
+    }
+
+    footer {
+      text-align: center;
+      color: #5f5f5f;
+      font-size: 0.62rem;
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 360px) {
+      .grid, .btn-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <span class="tag">PERSONAL TRAINING · SUWON</span>
+      <h1>이예림 PT 상담·공유 페이지</h1>
+      <p class="desc">지인에게 쉽게 공유하고, 바로 상담까지 연결할 수 있도록 만든 간편 페이지입니다.</p>
+
+      <div class="grid">
+        <div class="info">
+          <div class="k">📍 위치</div>
+          <div class="v">힐스테이트 푸르지오 수원 2단지<br>커뮤니티센터</div>
+        </div>
+        <div class="info">
+          <div class="k">🕐 레슨 가능 시간</div>
+          <div class="v">평일 06:00 – 15:00</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn-call" href="tel:031-233-8622">📞 전화 상담</a>
+        <a class="btn btn-kakao" href="https://open.kakao.com/o/Rims1" target="_blank" rel="noopener">💬 카카오톡 상담</a>
+      </div>
+    </section>
+
+    <section class="qr-card">
+      <h2 class="qr-title">QR로 바로 접속</h2>
+      <p class="qr-sub">아래 QR을 스캔하면 공식 홈페이지(<strong>rim-pt.com</strong>)로 이동합니다.</p>
+      <div class="qr-wrap">
+        <img id="qr" src="" alt="rim-pt.com 이동 QR 코드" width="240" height="240">
+      </div>
+
+      <a class="primary" href="https://rim-pt.com/">공식 홈페이지 열기</a>
+      <button class="secondary" id="shareBtn" type="button">📲 안드로이드 공유하기</button>
+      <p class="hint" id="shareHint">공유 기능이 없으면 링크 복사가 자동 시도됩니다.</p>
+      <p class="url" id="shareUrl">https://rim-pt.com/</p>
+    </section>
+
+    <footer>
+      Lee Yerim Personal Training<br>
+      QR 페이지는 안내·공유를 위한 단일 페이지입니다.
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var SITE = "https://rim-pt.com/";
+      var enc = encodeURIComponent(SITE);
+      document.getElementById("qr").src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=280x280&margin=8&data=" + enc;
+
+      if (new URLSearchParams(location.search).get("go") === "1") {
+        location.replace(SITE);
+        return;
+      }
+
+      var shareBtn = document.getElementById("shareBtn");
+      var shareHint = document.getElementById("shareHint");
+
+      async function copyFallback() {
+        try {
+          await navigator.clipboard.writeText(SITE);
+          shareHint.textContent = "링크가 복사되었습니다. 원하는 앱에 붙여넣어 공유하세요.";
+          shareHint.classList.add("ok");
+        } catch (e) {
+          shareHint.textContent = "공유를 지원하지 않는 환경입니다. 아래 URL을 직접 복사해 주세요.";
+        }
+      }
+
+      shareBtn.addEventListener("click", async function () {
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: "이예림 PT",
+              text: "수원 퍼스널 트레이닝 상담 페이지를 공유합니다.",
+              url: SITE,
+            });
+            shareHint.textContent = "공유가 완료되었습니다.";
+            shareHint.classList.add("ok");
+            return;
+          } catch (err) {
+            if (err && err.name === "AbortError") return;
+          }
+        }
+        await copyFallback();
+      });
+    })();
+  </script>
+</body>
+</html>
