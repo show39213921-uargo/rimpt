@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>수원 PT 이예림 | 팔달구 매교동 힐스테이트 푸르지오 퍼스널트레이닝</title>
 <meta name="description" content="수원시 팔달구 매교동 힐스테이트 푸르지오 PT. 다이어트, 체형교정, 근력강화, 디스크·허리 통증 완화 운동, 식단 코칭까지 1:1 맞춤 퍼스널트레이닝. 첫 상담 무료.">
 <meta name="keywords" content="수원 PT,수원시 PT,팔달구 PT,매교동 PT,힐스테이트 푸르지오 PT,이예림 PT,퍼스널트레이너,다이어트,체형교정,디스크 운동,허리통증 운동,재활 운동,1대1 PT,2대1 PT,수원 퍼스널트레이닝">
@@ -442,6 +442,13 @@
   /* ── PROGRAMS ── */
   .programs { background:var(--mid); }
   .prog-grid { display:flex; flex-direction:column; gap:1px; margin-top:2.5rem; background:var(--border); }
+  .programs-top-actions { margin-top:0.3rem; }
+  .programs-link-btn {
+    width:100%; padding:0.88rem 1rem; border:1px solid var(--border-light);
+    background:transparent; color:var(--text); cursor:pointer;
+    font-size:0.73rem; font-weight:600; letter-spacing:0.08em;
+    text-transform:uppercase; font-family:'Noto Sans KR', sans-serif;
+  }
   .prog-card {
     background:var(--card); padding:2rem 1.4rem;
     position:relative; overflow:hidden;
@@ -663,6 +670,7 @@
 <nav id="navbar">
   <button type="button" class="nav-logo-btn" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" aria-label="맨 위로">Lee Ye Rim</button>
   <div class="nav-actions">
+    <button type="button" class="nav-link-btn" onclick="location.href='remote-coaching.html'">원격 코칭</button>
     <button type="button" class="nav-link-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">소개·이력</button>
     <button type="button" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담</button>
   </div>
@@ -878,6 +886,9 @@
     <div class="section-label">PT 가격 안내</div>
     <h2 class="section-title">프로그램<br>선택하기</h2>
     <p style="color:var(--muted);font-size:0.82rem;line-height:1.75;font-weight:300;margin-bottom:1.5rem;">가격은 참고용이며, 첫 상담에서 체력·목표에 맞는 회차와 시간을 함께 조정할 수 있습니다.</p>
+    <div class="programs-top-actions">
+      <button class="programs-link-btn" onclick="location.href='remote-coaching.html'">원격 식단·자세 코칭 서비스 자세히 보기</button>
+    </div>
   </div>
   <div class="prog-grid">
 
@@ -924,6 +935,21 @@
         <div class="prog-item">기본 식단 가이드 제공</div>
       </div>
       <button class="prog-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">상담 신청하기</button>
+    </div>
+
+    <div class="prog-card fade-up">
+      <div class="prog-num">04</div>
+      <div class="prog-badge">신규</div>
+      <div class="prog-title">원격 코칭</div>
+      <div class="prog-price">ONLINE</div>
+      <div class="prog-period">식단 · 인바디 · 자세교정 · 일일 피드백</div>
+      <p class="prog-desc">센터 방문이 어려운 분들을 위한 비대면 관리형 서비스입니다. 회원님의 데이터와 운동 영상을 기준으로 매일 코칭합니다.</p>
+      <div class="prog-items">
+        <div class="prog-item">주 1회 인바디 기반 운동 루틴 업데이트</div>
+        <div class="prog-item">운동 영상 자세 교정 피드백</div>
+        <div class="prog-item">1일 1회 카카오톡 체크 리포트</div>
+      </div>
+      <button class="prog-btn" onclick="location.href='remote-coaching.html'">서비스 상세 보기</button>
     </div>
 
   </div>
@@ -1062,17 +1088,18 @@
         <input type="tel" id="f-phone" name="phone" placeholder="010-0000-0000" required>
       </div>
       <div class="form-field">
-        <label>관심 프로그램</label>
+        <label for="f-program">관심 프로그램</label>
         <select id="f-program" name="program">
           <option value="">선택해주세요</option>
           <option>1:1 PT — 200,000원 / 10회 (25분)</option>
           <option>1:1 PT — 400,000원 / 10회 (50분)</option>
           <option>2:1 PT — 500,000원 / 10회 (50분)</option>
+          <option>원격 코칭 — 식단/인바디/자세교정(비대면)</option>
           <option>아직 모르겠어요 (상담 후 결정)</option>
         </select>
       </div>
       <div class="form-field">
-        <label>주요 목표</label>
+        <label for="f-goal">주요 목표</label>
         <select id="f-goal" name="goal">
           <option value="">선택해주세요</option>
           <option>체지방 감량 / 다이어트</option>
