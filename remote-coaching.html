@@ -288,7 +288,10 @@
           imgNext.style.transform = "translateX(0px)";
         });
 
+        var finished = false;
         var done = function () {
+          if (finished) return;
+          finished = true;
           idx = nextIdx;
           setMeta();
           img.src = list[idx].src;
@@ -302,6 +305,8 @@
           imgNext.removeEventListener("transitionend", done);
         };
         imgNext.addEventListener("transitionend", done);
+        // transitionend 누락(브라우저/탭 전환 등) 대비 안전장치
+        setTimeout(done, 320);
       }
 
       img.addEventListener("error", function () {
@@ -324,6 +329,7 @@
         if (isAnimating || !e.touches || !e.touches.length) return;
         dragActive = true;
         dragStartX = e.touches[0].clientX;
+        currentOffsetX = 0;
         wrap.classList.add("dragging");
         img.style.transition = "none";
       }, { passive: true });
@@ -346,11 +352,19 @@
         }
         transitionTo(dx < 0 ? "next" : "prev", dx);
       }, { passive: true });
+      wrap.addEventListener("touchcancel", function () {
+        if (!dragActive) return;
+        dragActive = false;
+        dragStartX = null;
+        wrap.classList.remove("dragging");
+        resetCurrentPosition(true);
+      }, { passive: true });
 
       wrap.addEventListener("mousedown", function (e) {
         if (isAnimating) return;
         dragActive = true;
         dragStartX = e.clientX;
+        currentOffsetX = 0;
         wrap.classList.add("dragging");
         img.style.transition = "none";
       });
