@@ -500,6 +500,7 @@
     text-transform:uppercase; font-family:'Noto Sans KR', sans-serif;
     width:100%;
   }
+  .form-submit:disabled { opacity:0.55; cursor:wait; }
   .form-success {
     display:none; border:1px solid var(--border-light); padding:2rem;
     text-align:center; color:var(--text); font-weight:300; line-height:1.8;
@@ -943,18 +944,19 @@
   </div>
 
   <div class="fade-up">
-    <div class="contact-form" id="contact-form">
+    <!-- 상담 내용 수신: data-email 에 본인 메일 입력 후 배포. FormSubmit 첫 제출 시 해당 메일에서 활성화 링크를 눌러야 합니다. https://formsubmit.co -->
+    <form class="contact-form" id="contact-form" data-email="show3921@naver.com" autocomplete="on">
       <div class="form-field">
         <label>이름</label>
-        <input type="text" id="f-name" placeholder="홍길동">
+        <input type="text" id="f-name" name="name" placeholder="홍길동" required>
       </div>
       <div class="form-field">
         <label>연락처</label>
-        <input type="tel" id="f-phone" placeholder="010-0000-0000">
+        <input type="tel" id="f-phone" name="phone" placeholder="010-0000-0000" required>
       </div>
       <div class="form-field">
         <label>관심 프로그램</label>
-        <select id="f-program">
+        <select id="f-program" name="program">
           <option value="">선택해주세요</option>
           <option>1:1 PT — 200,000원 / 10회 (25분)</option>
           <option>1:1 PT — 400,000원 / 10회 (50분)</option>
@@ -964,7 +966,7 @@
       </div>
       <div class="form-field">
         <label>주요 목표</label>
-        <select id="f-goal">
+        <select id="f-goal" name="goal">
           <option value="">선택해주세요</option>
           <option>체지방 감량 / 다이어트</option>
           <option>근육 증가 / 벌크업</option>
@@ -976,10 +978,10 @@
       </div>
       <div class="form-field">
         <label>문의 내용 (선택)</label>
-        <textarea id="f-msg" placeholder="현재 상태나 목표, 궁금한 점을 자유롭게 적어주세요."></textarea>
+        <textarea id="f-msg" name="message" placeholder="현재 상태나 목표, 궁금한 점을 자유롭게 적어주세요."></textarea>
       </div>
-      <button class="form-submit" id="form-submit-btn">무료 상담 신청하기 →</button>
-    </div>
+      <button type="submit" class="form-submit" id="form-submit-btn">무료 상담 신청하기 →</button>
+    </form>
     <div class="form-success" id="form-success">
       신청이 완료되었습니다 ✓<br>
       <span style="font-size:0.8rem;color:var(--muted);font-weight:300;display:block;margin-top:0.5rem;">24시간 내 연락드리겠습니다.<br>감사합니다.</span>
@@ -1105,13 +1107,48 @@ document.getElementById('rev-prev').onclick = () => go(idx-1);
 document.getElementById('rev-next').onclick = () => go(idx+1);
 buildDots();
 
-// ── FORM SUBMIT ──
-document.getElementById('form-submit-btn').addEventListener('click', () => {
+// ── FORM SUBMIT (FormSubmit → data-email 로 수신) ──
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formEl = e.target;
+  const to = (formEl.dataset.email || '').trim();
+  if (!to || !to.includes('@')) {
+    alert('index.html 상담 폼의 data-email 속성에 수신할 이메일 주소를 넣어주세요.');
+    return;
+  }
   const n = document.getElementById('f-name').value.trim();
   const p = document.getElementById('f-phone').value.trim();
-  if(!n||!p) { alert('이름과 연락처를 입력해주세요.'); return; }
-  document.getElementById('contact-form').style.display = 'none';
-  document.getElementById('form-success').style.display = 'block';
+  if (!n || !p) { alert('이름과 연락처를 입력해주세요.'); return; }
+  const prog = document.getElementById('f-program').value.trim() || '(미선택)';
+  const goal = document.getElementById('f-goal').value.trim() || '(미선택)';
+  const msg = document.getElementById('f-msg').value.trim() || '(없음)';
+  const btn = document.getElementById('form-submit-btn');
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(to), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        _subject: '[rimpt] 무료 상담 신청',
+        이름: n,
+        연락처: p,
+        관심프로그램: prog,
+        주요목표: goal,
+        문의내용: msg,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error((data && data.message) || res.statusText || 'fail');
+    }
+    formEl.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  } catch (err) {
+    console.error(err);
+    alert('전송에 실패했습니다. 잠시 후 다시 시도하거나 전화·카카오톡으로 연락 주세요.');
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 // ── PHOTO GALLERY DOTS ──
