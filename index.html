@@ -323,6 +323,12 @@
     box-shadow: 0 0 12px rgba(0,0,0,0.8);
   }
   .ba-after-clip { position:absolute; inset:0; overflow:hidden; }
+  .ba-img {
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center top;
+    display:block; pointer-events:none; user-select:none;
+  }
+  .ba-before-label, .ba-after-label { z-index:2; }
   .ba-icon-grid {
     display:grid; grid-template-columns:repeat(3,50px);
     gap:10px; align-items:center; justify-content:center;
@@ -674,20 +680,12 @@
     <div class="ba-card fade-up" data-category="diet">
       <div class="ba-slider-wrap" id="slider1">
         <div class="ba-before">
-          <div class="ba-icon-grid">
-            <div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div>
-            <div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div>
-            <div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div>
-          </div>
+          <img class="ba-img" src="assets/트레이너/trainer-1.jpeg" alt="변화 전 (임시 이미지)" loading="lazy">
           <div class="ba-before-label">BEFORE</div>
         </div>
         <div class="ba-after-clip" id="after1" style="clip-path:inset(0 50% 0 0);">
           <div class="ba-after" style="position:absolute;inset:0;">
-            <div class="ba-icon-grid">
-              <div class="ba-icon-cell l1"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l1"></div>
-              <div class="ba-icon-cell l3"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l3"></div>
-              <div class="ba-icon-cell l1"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l1"></div>
-            </div>
+            <img class="ba-img" src="assets/트레이너/trainer-2.jpeg" alt="변화 후 (임시 이미지)" loading="lazy">
             <div class="ba-after-label">AFTER</div>
           </div>
         </div>
@@ -707,20 +705,12 @@
     <div class="ba-card fade-up" data-category="bulk">
       <div class="ba-slider-wrap" id="slider2">
         <div class="ba-before">
-          <div class="ba-icon-grid">
-            <div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div>
-            <div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div>
-            <div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div>
-          </div>
+          <img class="ba-img" src="assets/트레이너/trainer-2.jpeg" alt="변화 전 (임시 이미지)" loading="lazy">
           <div class="ba-before-label">BEFORE</div>
         </div>
         <div class="ba-after-clip" id="after2" style="clip-path:inset(0 50% 0 0);">
           <div class="ba-after" style="position:absolute;inset:0;">
-            <div class="ba-icon-grid">
-              <div class="ba-icon-cell l3"></div><div class="ba-icon-cell l1"></div><div class="ba-icon-cell l3"></div>
-              <div class="ba-icon-cell l1"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l1"></div>
-              <div class="ba-icon-cell l3"></div><div class="ba-icon-cell l1"></div><div class="ba-icon-cell l3"></div>
-            </div>
+            <img class="ba-img" src="assets/트레이너/trainer-1.jpeg" alt="변화 후 (임시 이미지)" loading="lazy">
             <div class="ba-after-label">AFTER</div>
           </div>
         </div>
@@ -740,20 +730,12 @@
     <div class="ba-card fade-up" data-category="rehab">
       <div class="ba-slider-wrap" id="slider3">
         <div class="ba-before">
-          <div class="ba-icon-grid">
-            <div class="ba-icon-cell d1"></div><div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div>
-            <div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div>
-            <div class="ba-icon-cell d1"></div><div class="ba-icon-cell d2"></div><div class="ba-icon-cell d1"></div>
-          </div>
+          <img class="ba-img" src="assets/트레이너/trainer-1.jpeg" alt="변화 전 (임시 이미지)" loading="lazy">
           <div class="ba-before-label">BEFORE</div>
         </div>
         <div class="ba-after-clip" id="after3" style="clip-path:inset(0 50% 0 0);">
           <div class="ba-after" style="position:absolute;inset:0;">
-            <div class="ba-icon-grid">
-              <div class="ba-icon-cell l2"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l2"></div>
-              <div class="ba-icon-cell l3"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l2"></div>
-              <div class="ba-icon-cell l2"></div><div class="ba-icon-cell l3"></div><div class="ba-icon-cell l2"></div>
-            </div>
+            <img class="ba-img" src="assets/트레이너/trainer-2.jpeg" alt="변화 후 (임시 이미지)" loading="lazy">
             <div class="ba-after-label">AFTER</div>
           </div>
         </div>
