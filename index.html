@@ -1141,11 +1141,17 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     if (!res.ok) {
       throw new Error((data && data.message) || res.statusText || 'fail');
     }
+    const ok = data.success === true || data.success === 'true';
+    if (!ok) {
+      const msg = (data && data.message) || '전송이 완료되지 않았습니다.';
+      throw new Error(msg);
+    }
     formEl.style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   } catch (err) {
     console.error(err);
-    alert('전송에 실패했습니다. 잠시 후 다시 시도하거나 전화·카카오톡으로 연락 주세요.');
+    const m = (err && err.message) ? String(err.message) : '';
+    alert(m && m.length < 500 ? m : '전송에 실패했습니다. 잠시 후 다시 시도하거나 전화·카카오톡으로 연락 주세요.');
   } finally {
     btn.disabled = false;
   }
