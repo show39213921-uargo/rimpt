@@ -549,6 +549,118 @@
   }
   .rev-dot.active { background:var(--accent); width:32px; }
 
+  .review-photo-viewer {
+    margin-top:1.75rem;
+    max-width:440px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .review-photo-main {
+    position:relative;
+    margin:0;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:#0c0c0c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:220px;
+    box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  }
+  .review-photo-badge {
+    position:absolute;
+    top:0.65rem;
+    left:0.65rem;
+    z-index:1;
+    font-size:0.58rem;
+    letter-spacing:0.1em;
+    font-weight:600;
+    color:var(--text);
+    background:rgba(8,8,8,0.78);
+    border:1px solid var(--border-light);
+    padding:0.3rem 0.6rem;
+    backdrop-filter:blur(8px);
+  }
+  .review-photo-main-img {
+    display:block;
+    max-width:100%;
+    width:auto;
+    height:auto;
+    max-height:min(58vh, 480px);
+    object-fit:contain;
+  }
+  .review-photo-arrows {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:0.75rem;
+    margin:0.85rem 0 0.35rem;
+  }
+  .review-photo-arrow {
+    width:44px;
+    height:44px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--muted);
+    cursor:pointer;
+    font-size:1.35rem;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    transition:background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .review-photo-arrow:hover {
+    color:var(--text);
+    border-color:var(--border-light);
+    background:var(--darker);
+  }
+  .review-photo-thumbs {
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:0.5rem;
+    margin-top:0.65rem;
+  }
+  .review-photo-thumb {
+    position:relative;
+    margin:0;
+    padding:0;
+    border:2px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    background:var(--card);
+    aspect-ratio:1;
+    transition:border-color 0.2s, box-shadow 0.2s, opacity 0.2s;
+  }
+  .review-photo-thumb img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .review-photo-thumb:hover { border-color:var(--border-light); }
+  .review-photo-thumb.active {
+    border-color:var(--accent);
+    box-shadow:0 0 0 1px var(--accent);
+  }
+  .review-photo-thumb:focus-visible {
+    outline:2px solid var(--accent2);
+    outline-offset:2px;
+  }
+  .review-carousel-head {
+    margin-top:2.75rem;
+    padding-top:2rem;
+    border-top:1px solid var(--border);
+    font-size:0.62rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--muted2);
+    font-weight:500;
+  }
+
   /* ── CONTACT ── */
   .contact { background:var(--mid); }
   .contact-desc { color:var(--muted); line-height:1.9; margin-bottom:1.25rem; font-size:0.87rem; font-weight:300; }
@@ -963,8 +1075,33 @@
 <section class="testimonials" id="reviews">
   <div class="fade-up">
     <div class="section-label">회원 후기</div>
-    <h2 class="section-title">진짜 회원들의<br>솔직한 이야기</h2>
-    <p style="color:var(--muted2);font-size:0.72rem;line-height:1.6;font-weight:300;margin:-0.3rem 0 1.2rem;">실제 수업·상담을 바탕으로 한 피드백이며, 노출 범위는 모두 동의를 받은 내용만 사용합니다.</p>
+    <h2 class="section-title">진짜 변화<br>리얼 후기</h2>
+    <p style="color:var(--muted2);font-size:0.72rem;line-height:1.6;font-weight:300;margin:-0.3rem 0 0;">실제 수업·상담을 바탕으로 한 피드백이며, 노출 범위는 모두 동의를 받은 내용만 사용합니다.</p>
+    <div class="review-photo-viewer fade-up" id="review-photo-viewer" aria-label="회원 후기 사진 갤러리" tabindex="0">
+      <figure class="review-photo-main">
+        <span class="review-photo-badge" id="review-photo-badge">후기 1 / 4</span>
+        <img id="review-photo-main-img" class="review-photo-main-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="회원 후기" width="800" height="1066" decoding="async">
+      </figure>
+      <div class="review-photo-arrows" role="group" aria-label="이전·다음 후기">
+        <button type="button" class="review-photo-arrow" id="review-photo-prev" aria-label="이전 후기">‹</button>
+        <button type="button" class="review-photo-arrow" id="review-photo-next" aria-label="다음 후기">›</button>
+      </div>
+      <div class="review-photo-thumbs" id="review-photo-thumbs" role="group" aria-label="후기 썸네일">
+        <button type="button" class="review-photo-thumb active" data-review-thumb="0" aria-pressed="true" aria-label="후기 1 보기">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="120" height="120" loading="lazy" decoding="async">
+        </button>
+        <button type="button" class="review-photo-thumb" data-review-thumb="1" aria-pressed="false" aria-label="후기 2 보기">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="120" height="120" loading="lazy" decoding="async">
+        </button>
+        <button type="button" class="review-photo-thumb" data-review-thumb="2" aria-pressed="false" aria-label="후기 3 보기">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="120" height="120" loading="lazy" decoding="async">
+        </button>
+        <button type="button" class="review-photo-thumb" data-review-thumb="3" aria-pressed="false" aria-label="후기 4 보기">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="120" height="120" loading="lazy" decoding="async">
+        </button>
+      </div>
+    </div>
+    <p class="review-carousel-head fade-up">텍스트 후기</p>
     <div class="reviews-nav">
       <button class="rev-nav-btn" id="rev-prev">←</button>
       <button class="rev-nav-btn" id="rev-next">→</button>
@@ -1190,13 +1327,16 @@ var BA_CONTENTS_INDEX = {
   otherFiles: [
     '주00인바디 비포1.jpg',
     '주00인바디 비포2.jpg',
-    '예림 pt후기 1.jpg',
-    '예림 pt후기2.jpg',
-    'ㅇㅖ림 pt후기 3.jpg',
-    '예림pt후기4.jpg',
     '예림바프1.jpg',
   ],
 };
+/** assets/contents — 파일명에 「후기」 포함, 표시 순서 1→4 */
+var REVIEW_PHOTOS_INDEX = [
+  'assets/contents/예림 pt후기 1.jpg',
+  'assets/contents/예림 pt후기2.jpg',
+  'assets/contents/ㅇㅖ림 pt후기 3.jpg',
+  'assets/contents/예림pt후기4.jpg',
+];
 function baEncPath(relPath) {
   if (!relPath) return '';
   return relPath.split('/').map(function (seg) { return encodeURIComponent(seg); }).join('/');
@@ -1224,6 +1364,51 @@ function applyBaContentsIndex() {
   });
 }
 applyBaContentsIndex();
+
+function initReviewPhotoGallery() {
+  var viewer = document.getElementById('review-photo-viewer');
+  var mainImg = document.getElementById('review-photo-main-img');
+  var badge = document.getElementById('review-photo-badge');
+  var prevBtn = document.getElementById('review-photo-prev');
+  var nextBtn = document.getElementById('review-photo-next');
+  if (!viewer || !mainImg || !REVIEW_PHOTOS_INDEX.length) return;
+  var urls = REVIEW_PHOTOS_INDEX.map(function (src) { return baEncPath(src); });
+  var thumbs = viewer.querySelectorAll('.review-photo-thumb');
+  var n = urls.length;
+  var cur = 0;
+
+  function setIdx(i) {
+    cur = ((i % n) + n) % n;
+    mainImg.src = urls[cur];
+    mainImg.alt = '회원 후기 ' + (cur + 1);
+    if (badge) badge.textContent = '후기 ' + (cur + 1) + ' / ' + n;
+    thumbs.forEach(function (btn, j) {
+      var on = j === cur;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  thumbs.forEach(function (btn, j) {
+    var im = btn.querySelector('img');
+    if (im && urls[j]) {
+      im.src = urls[j];
+      im.alt = '';
+    }
+    btn.addEventListener('click', function () { if (j < n) setIdx(j); });
+  });
+
+  if (prevBtn) prevBtn.addEventListener('click', function () { setIdx(cur - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { setIdx(cur + 1); });
+
+  viewer.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); setIdx(cur - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); setIdx(cur + 1); }
+  });
+
+  setIdx(0);
+}
+initReviewPhotoGallery();
 
 // ── BEFORE/AFTER SLIDERS ──
 function initSlider(wId, aId, dId) {
@@ -1267,13 +1452,14 @@ document.querySelectorAll('.ba-tab').forEach(tab => {
   });
 });
 
-// ── REVIEWS SLIDER ──
+// ── REVIEWS SLIDER (텍스트 후기) ──
 const track = document.getElementById('rev-track');
-const cards = track.querySelectorAll('.review-card');
 const dotsEl = document.getElementById('rev-dots');
+const cards = track ? track.querySelectorAll('.review-card') : [];
 let idx = 0;
 
 function buildDots() {
+  if (!dotsEl || !cards.length) return;
   dotsEl.innerHTML = '';
   cards.forEach((_,i) => {
     const d = document.createElement('div');
@@ -1283,22 +1469,26 @@ function buildDots() {
   });
 }
 function go(i) {
+  if (!track || !dotsEl || !cards.length) return;
   idx = Math.min(Math.max(i,0), cards.length-1);
   const w = cards[0].offsetWidth + 1;
   track.style.transform = `translateX(-${idx*w}px)`;
   dotsEl.querySelectorAll('.rev-dot').forEach((d,j) => d.classList.toggle('active', j===idx));
 }
 
-// Touch swipe for reviews
-let touchStartX = 0;
-track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-track.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if(Math.abs(dx) > 50) go(dx < 0 ? idx+1 : idx-1);
-});
+if (track && cards.length) {
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if(Math.abs(dx) > 50) go(dx < 0 ? idx+1 : idx-1);
+  });
+}
 
-document.getElementById('rev-prev').onclick = () => go(idx-1);
-document.getElementById('rev-next').onclick = () => go(idx+1);
+const revPrev = document.getElementById('rev-prev');
+const revNext = document.getElementById('rev-next');
+if (revPrev) revPrev.onclick = () => go(idx-1);
+if (revNext) revNext.onclick = () => go(idx+1);
 buildDots();
 
 // ── FORM SUBMIT (FormSubmit → data-email 로 수신) ──
