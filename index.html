@@ -394,6 +394,78 @@
   }
   .ba-info-stat-lbl { font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
 
+  .ba-pair-strip {
+    padding:0.65rem 1rem 0.75rem;
+    border-bottom:1px solid var(--border);
+    background:rgba(0,0,0,0.22);
+  }
+  .ba-pair-toggle {
+    display:flex;
+    gap:0.4rem;
+    margin-bottom:0.55rem;
+  }
+  .ba-pair-btn {
+    flex:1;
+    font-size:0.62rem;
+    letter-spacing:0.06em;
+    padding:0.45rem 0.35rem;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--muted);
+    cursor:pointer;
+    font-family:'Noto Sans KR', sans-serif;
+    border-radius:8px;
+    transition:border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .ba-pair-btn.active {
+    border-color:var(--accent);
+    color:var(--text);
+    background:rgba(255,255,255,0.04);
+  }
+  .ba-mini-grid {
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:0.4rem;
+  }
+  .ba-mini-grid.ba-mini-grid--many {
+    grid-template-columns:repeat(auto-fit, minmax(3.25rem, 1fr));
+  }
+  .ba-pair-host:empty { display:none; }
+  .ba-mini-tile {
+    position:relative;
+    margin:0;
+    padding:0;
+    border:2px solid transparent;
+    border-radius:8px;
+    overflow:hidden;
+    cursor:pointer;
+    background:#0f0f0f;
+    aspect-ratio:1;
+    transition:border-color 0.2s;
+  }
+  .ba-mini-tile.active { border-color:var(--accent); }
+  .ba-mini-tile:focus-visible { outline:2px solid var(--accent2); outline-offset:2px; }
+  .ba-mini-lbl {
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:1;
+    font-size:0.48rem;
+    letter-spacing:0.04em;
+    padding:0.2rem 0.25rem;
+    background:rgba(0,0,0,0.72);
+    color:#c8c8c8;
+    text-align:center;
+  }
+  .ba-mini-img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+  }
+
   /* ── PROGRAMS ── */
   .programs { background:var(--mid); }
   .prog-grid { display:flex; flex-direction:column; gap:1px; margin-top:2.5rem; background:var(--border); }
@@ -850,12 +922,13 @@
         </div>
         <div class="ba-divider" id="div1" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
       </div>
+      <div class="ba-pair-host"></div>
       <div class="ba-info">
         <div class="ba-info-name" data-ba-member>주00 회원님 · 여성 · 28세</div>
         <div class="ba-info-sub">3개월 체지방 감량 프로그램</div>
         <div class="ba-info-stats">
           <div class="ba-info-stat"><div class="ba-info-stat-val">-12kg</div><div class="ba-info-stat-lbl">체중</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">-9%</div><div class="ba-info-stat-lbl">체지방률</div></div>
+          <div class="ba-info-stat"><div class="ba-info-stat-val">-9kg</div><div class="ba-info-stat-lbl">체지방량</div></div>
           <div class="ba-info-stat"><div class="ba-info-stat-val">90일</div><div class="ba-info-stat-lbl">기간</div></div>
         </div>
       </div>
@@ -875,12 +948,12 @@
         </div>
         <div class="ba-divider" id="div2" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
       </div>
+      <div class="ba-pair-host"></div>
       <div class="ba-info">
-        <div class="ba-info-name" data-ba-member>박00 회원님 · 남성 · 34세</div>
-        <div class="ba-info-sub">6개월 벌크업 & 근력 강화</div>
+        <div class="ba-info-name" data-ba-member>박00 회원님</div>
+        <div class="ba-info-sub">바디프로필 준비</div>
         <div class="ba-info-stats">
-          <div class="ba-info-stat"><div class="ba-info-stat-val">+8kg</div><div class="ba-info-stat-lbl">근육량</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">2배</div><div class="ba-info-stat-lbl">벤치프레스</div></div>
+          <div class="ba-info-stat"><div class="ba-info-stat-val">-15kg</div><div class="ba-info-stat-lbl">체중</div></div>
           <div class="ba-info-stat"><div class="ba-info-stat-val">180일</div><div class="ba-info-stat-lbl">기간</div></div>
         </div>
       </div>
@@ -900,6 +973,7 @@
         </div>
         <div class="ba-divider" id="div3" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
       </div>
+      <div class="ba-pair-host"></div>
       <div class="ba-info">
         <div class="ba-info-name" data-ba-member>엄00 회원님 · 여성 · 42세</div>
         <div class="ba-info-sub">4개월 체형교정 & 자세개선</div>
@@ -972,6 +1046,7 @@
       <button class="prog-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">상담 신청하기</button>
     </div>
 
+    <!-- 원격 코칭 프로그램 카드 (상담 박스) — 비활성 시 주석 유지
     <div class="prog-card fade-up">
       <div class="prog-num">04</div>
       <div class="prog-badge">신규</div>
@@ -986,6 +1061,7 @@
       </div>
       <button class="prog-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">상담 신청하기</button>
     </div>
+    -->
 
   </div>
 </section>
@@ -1209,15 +1285,22 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
 // ── assets/contents 비포·애프터 인덱스 (파일명: {코드}비포*.jpg ↔ {코드}애프터*.jpg) ──
+// UI: pairs 없음 또는 pairs 1개 → 슬라이더만. pairs 2개 이상 → 각 카드 .ba-pair-host 에 N차 버튼 + 썸네일 자동 생성.
 var BA_CONTENTS_INDEX = {
   base: 'assets/contents/',
   slides: [
     { code: '주00', category: 'diet',  before: 'assets/contents/주00비포.jpg',  after: 'assets/contents/주00애프터.jpg',  member: '주00 회원님 · 여성 · 28세' },
-    { code: '박00', category: 'bulk',  before: 'assets/contents/박00비포.jpg',  after: 'assets/contents/박00애프터.jpg',  member: '박00 회원님 · 남성 · 34세' },
+    {
+      code: '박00',
+      category: 'bulk',
+      member: '박00 회원님',
+      infoSub: '바디프로필 준비',
+      pairs: [
+        { before: 'assets/contents/박00비포.jpg', after: 'assets/contents/박00애프터.jpg' },
+        { before: 'assets/contents/박00비포2.jpg', after: 'assets/contents/박00애프터2.jpg' },
+      ],
+    },
     { code: '엄00', category: 'rehab', before: 'assets/contents/엄00 비포.jpg', after: 'assets/contents/엄00애프터.jpg', member: '엄00 회원님 · 여성 · 42세' },
-  ],
-  alternates: [
-    { code: '박00', before: 'assets/contents/박00비포2.jpg', after: 'assets/contents/박00애프터2.jpg' },
   ],
   otherFiles: [
     '주00인바디 비포1.jpg',
@@ -1242,23 +1325,148 @@ function applyBaContentsIndex() {
   var cards = root.querySelectorAll('.ba-card');
   BA_CONTENTS_INDEX.slides.forEach(function (row, i) {
     var card = cards[i];
-    if (!card || !row.before || !row.after) return;
+    if (!card) return;
+    var pair0 = null;
+    if (row.pairs && row.pairs.length) {
+      pair0 = row.pairs[0];
+    } else if (row.before && row.after) {
+      pair0 = { before: row.before, after: row.after };
+    }
+    if (!pair0) return;
     var beforeImg = card.querySelector('.ba-before .ba-img');
     var afterImg = card.querySelector('.ba-after .ba-img');
     if (beforeImg) {
-      beforeImg.src = baEncPath(row.before);
+      beforeImg.src = baEncPath(pair0.before);
       beforeImg.alt = (row.code || '') + ' 회원 변화 전';
     }
     if (afterImg) {
-      afterImg.src = baEncPath(row.after);
+      afterImg.src = baEncPath(pair0.after);
       afterImg.alt = (row.code || '') + ' 회원 변화 후';
     }
     if (row.category) card.dataset.category = row.category;
     var nameEl = card.querySelector('[data-ba-member]');
     if (nameEl && row.member) nameEl.textContent = row.member;
+    var subEl = card.querySelector('.ba-info-sub');
+    if (subEl && row.infoSub) subEl.textContent = row.infoSub;
   });
 }
 applyBaContentsIndex();
+
+/** pairs.length ≤ 1 → 슬라이더만. pairs.length > 1 → N차 버튼 + 비포·애프터 썸네일 그리드(2×N) */
+function initBaMultiPairCards() {
+  var root = document.querySelector('.ba-cases');
+  if (!root || !BA_CONTENTS_INDEX.slides) return;
+  var cards = root.querySelectorAll('.ba-card');
+  BA_CONTENTS_INDEX.slides.forEach(function (row, i) {
+    var card = cards[i];
+    var host = card ? card.querySelector('.ba-pair-host') : null;
+    if (!card || !host) return;
+    host.innerHTML = '';
+    card.classList.toggle('ba-card--multi', !!(row.pairs && row.pairs.length > 1));
+    if (!row.pairs || row.pairs.length <= 1) return;
+
+    var nPair = row.pairs.length;
+    var beforeImg = card.querySelector('.ba-before .ba-img');
+    var afterImg = card.querySelector('.ba-after .ba-img');
+    if (!beforeImg || !afterImg) return;
+
+    var strip = document.createElement('div');
+    strip.className = 'ba-pair-strip';
+    strip.setAttribute('aria-label', (row.code || '회원') + ' 전후 사진 세트');
+
+    var toggle = document.createElement('div');
+    toggle.className = 'ba-pair-toggle';
+    toggle.setAttribute('role', 'group');
+    for (var j = 0; j < nPair; j++) {
+      var pbtn = document.createElement('button');
+      pbtn.type = 'button';
+      pbtn.className = 'ba-pair-btn' + (j === 0 ? ' active' : '');
+      pbtn.setAttribute('data-ba-pair', String(j));
+      pbtn.textContent = (j + 1) + '차 전후';
+      toggle.appendChild(pbtn);
+    }
+
+    var grid = document.createElement('div');
+    grid.className = 'ba-mini-grid';
+    if (nPair * 2 > 4) grid.classList.add('ba-mini-grid--many');
+    grid.setAttribute('role', 'list');
+
+    function beforeLbl(j) { return j === 0 ? '비포' : '비포' + (j + 1); }
+    function afterLbl(j) { return j === 0 ? '애프터' : '애프터' + (j + 1); }
+
+    for (var b = 0; b < nPair; b++) {
+      var tb = document.createElement('button');
+      tb.type = 'button';
+      tb.className = 'ba-mini-tile' + (b === 0 ? ' active' : '');
+      tb.setAttribute('data-ba-pair', String(b));
+      tb.setAttribute('aria-label', beforeLbl(b));
+      var spb = document.createElement('span');
+      spb.className = 'ba-mini-lbl';
+      spb.textContent = beforeLbl(b);
+      var imb = document.createElement('img');
+      imb.className = 'ba-mini-img';
+      imb.alt = '';
+      imb.width = 120;
+      imb.height = 120;
+      imb.loading = 'lazy';
+      imb.src = baEncPath(row.pairs[b].before);
+      tb.appendChild(spb);
+      tb.appendChild(imb);
+      grid.appendChild(tb);
+    }
+    for (var a = 0; a < nPair; a++) {
+      var ta = document.createElement('button');
+      ta.type = 'button';
+      ta.className = 'ba-mini-tile' + (a === 0 ? ' active' : '');
+      ta.setAttribute('data-ba-pair', String(a));
+      ta.setAttribute('aria-label', afterLbl(a));
+      var spa = document.createElement('span');
+      spa.className = 'ba-mini-lbl';
+      spa.textContent = afterLbl(a);
+      var ima = document.createElement('img');
+      ima.className = 'ba-mini-img';
+      ima.alt = '';
+      ima.width = 120;
+      ima.height = 120;
+      ima.loading = 'lazy';
+      ima.src = baEncPath(row.pairs[a].after);
+      ta.appendChild(spa);
+      ta.appendChild(ima);
+      grid.appendChild(ta);
+    }
+
+    strip.appendChild(toggle);
+    strip.appendChild(grid);
+    host.appendChild(strip);
+
+    var cur = 0;
+    function setPair(raw) {
+      var idx = parseInt(raw, 10);
+      if (isNaN(idx)) idx = 0;
+      cur = Math.max(0, Math.min(idx, nPair - 1));
+      var p = row.pairs[cur];
+      beforeImg.src = baEncPath(p.before);
+      afterImg.src = baEncPath(p.after);
+      strip.querySelectorAll('.ba-pair-btn').forEach(function (btn, jj) {
+        btn.classList.toggle('active', jj === cur);
+      });
+      strip.querySelectorAll('.ba-mini-tile').forEach(function (t) {
+        var pi = parseInt(t.getAttribute('data-ba-pair'), 10);
+        t.classList.toggle('active', pi === cur);
+      });
+    }
+
+    strip.querySelectorAll('.ba-pair-btn').forEach(function (btn, jj) {
+      btn.addEventListener('click', function () { setPair(jj); });
+    });
+    strip.querySelectorAll('.ba-mini-tile').forEach(function (t) {
+      t.addEventListener('click', function () {
+        setPair(parseInt(t.getAttribute('data-ba-pair'), 10));
+      });
+    });
+  });
+}
+initBaMultiPairCards();
 
 function initReviewPhotoGallery() {
   var viewer = document.getElementById('review-photo-viewer');
