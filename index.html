@@ -808,19 +808,19 @@
     <div class="ba-card fade-up" data-category="diet">
       <div class="ba-slider-wrap" id="slider1">
         <div class="ba-before">
-          <img class="ba-img" src="assets/트레이너/trainer-1.jpeg" alt="변화 전 (임시 이미지)" loading="lazy">
+          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
           <div class="ba-before-label">BEFORE</div>
         </div>
         <div class="ba-after-clip" id="after1" style="clip-path:inset(0 50% 0 0);">
           <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="assets/트레이너/trainer-2.jpeg" alt="변화 후 (임시 이미지)" loading="lazy">
+            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
             <div class="ba-after-label">AFTER</div>
           </div>
         </div>
         <div class="ba-divider" id="div1" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
       </div>
       <div class="ba-info">
-        <div class="ba-info-name">김00 회원님 · 여성 · 28세</div>
+        <div class="ba-info-name" data-ba-member>주00 회원님 · 여성 · 28세</div>
         <div class="ba-info-sub">3개월 체지방 감량 프로그램</div>
         <div class="ba-info-stats">
           <div class="ba-info-stat"><div class="ba-info-stat-val">-12kg</div><div class="ba-info-stat-lbl">체중</div></div>
@@ -833,19 +833,19 @@
     <div class="ba-card fade-up" data-category="bulk">
       <div class="ba-slider-wrap" id="slider2">
         <div class="ba-before">
-          <img class="ba-img" src="assets/트레이너/trainer-2.jpeg" alt="변화 전 (임시 이미지)" loading="lazy">
+          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
           <div class="ba-before-label">BEFORE</div>
         </div>
         <div class="ba-after-clip" id="after2" style="clip-path:inset(0 50% 0 0);">
           <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="assets/트레이너/trainer-1.jpeg" alt="변화 후 (임시 이미지)" loading="lazy">
+            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
             <div class="ba-after-label">AFTER</div>
           </div>
         </div>
         <div class="ba-divider" id="div2" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
       </div>
       <div class="ba-info">
-        <div class="ba-info-name">이00 회원님 · 남성 · 34세</div>
+        <div class="ba-info-name" data-ba-member>박00 회원님 · 남성 · 34세</div>
         <div class="ba-info-sub">6개월 벌크업 & 근력 강화</div>
         <div class="ba-info-stats">
           <div class="ba-info-stat"><div class="ba-info-stat-val">+8kg</div><div class="ba-info-stat-lbl">근육량</div></div>
@@ -858,19 +858,19 @@
     <div class="ba-card fade-up" data-category="rehab">
       <div class="ba-slider-wrap" id="slider3">
         <div class="ba-before">
-          <img class="ba-img" src="assets/트레이너/trainer-1.jpeg" alt="변화 전 (임시 이미지)" loading="lazy">
+          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
           <div class="ba-before-label">BEFORE</div>
         </div>
         <div class="ba-after-clip" id="after3" style="clip-path:inset(0 50% 0 0);">
           <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="assets/트레이너/trainer-2.jpeg" alt="변화 후 (임시 이미지)" loading="lazy">
+            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
             <div class="ba-after-label">AFTER</div>
           </div>
         </div>
         <div class="ba-divider" id="div3" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
       </div>
       <div class="ba-info">
-        <div class="ba-info-name">최00 회원님 · 여성 · 42세</div>
+        <div class="ba-info-name" data-ba-member>엄00 회원님 · 여성 · 42세</div>
         <div class="ba-info-sub">4개월 체형교정 & 자세개선</div>
         <div class="ba-info-stats">
           <div class="ba-info-stat"><div class="ba-info-stat-val">-5cm</div><div class="ba-info-stat-lbl">허리둘레</div></div>
@@ -1175,6 +1175,55 @@ document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
 setTimeout(() => {
   document.querySelectorAll('.hero-stat-num[data-count]').forEach(el => animateCounter(el, +el.dataset.count, 1500));
 }, 400);
+
+// ── assets/contents 비포·애프터 인덱스 (파일명: {코드}비포*.jpg ↔ {코드}애프터*.jpg) ──
+var BA_CONTENTS_INDEX = {
+  base: 'assets/contents/',
+  slides: [
+    { code: '주00', category: 'diet',  before: 'assets/contents/주00비포.jpg',  after: 'assets/contents/주00애프터.jpg',  member: '주00 회원님 · 여성 · 28세' },
+    { code: '박00', category: 'bulk',  before: 'assets/contents/박00비포.jpg',  after: 'assets/contents/박00애프터.jpg',  member: '박00 회원님 · 남성 · 34세' },
+    { code: '엄00', category: 'rehab', before: 'assets/contents/엄00 비포.jpg', after: 'assets/contents/엄00애프터.jpg', member: '엄00 회원님 · 여성 · 42세' },
+  ],
+  alternates: [
+    { code: '박00', before: 'assets/contents/박00비포2.jpg', after: 'assets/contents/박00애프터2.jpg' },
+  ],
+  otherFiles: [
+    '주00인바디 비포1.jpg',
+    '주00인바디 비포2.jpg',
+    '예림 pt후기 1.jpg',
+    '예림 pt후기2.jpg',
+    'ㅇㅖ림 pt후기 3.jpg',
+    '예림pt후기4.jpg',
+    '예림바프1.jpg',
+  ],
+};
+function baEncPath(relPath) {
+  if (!relPath) return '';
+  return relPath.split('/').map(function (seg) { return encodeURIComponent(seg); }).join('/');
+}
+function applyBaContentsIndex() {
+  var root = document.querySelector('.ba-cases');
+  if (!root || !BA_CONTENTS_INDEX.slides) return;
+  var cards = root.querySelectorAll('.ba-card');
+  BA_CONTENTS_INDEX.slides.forEach(function (row, i) {
+    var card = cards[i];
+    if (!card || !row.before || !row.after) return;
+    var beforeImg = card.querySelector('.ba-before .ba-img');
+    var afterImg = card.querySelector('.ba-after .ba-img');
+    if (beforeImg) {
+      beforeImg.src = baEncPath(row.before);
+      beforeImg.alt = (row.code || '') + ' 회원 변화 전';
+    }
+    if (afterImg) {
+      afterImg.src = baEncPath(row.after);
+      afterImg.alt = (row.code || '') + ' 회원 변화 후';
+    }
+    if (row.category) card.dataset.category = row.category;
+    var nameEl = card.querySelector('[data-ba-member]');
+    if (nameEl && row.member) nameEl.textContent = row.member;
+  });
+}
+applyBaContentsIndex();
 
 // ── BEFORE/AFTER SLIDERS ──
 function initSlider(wId, aId, dId) {
