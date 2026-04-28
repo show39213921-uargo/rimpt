@@ -329,9 +329,48 @@
     padding:0.75rem 1rem; margin-bottom:1.2rem; font-weight:300;
   }
   .ba-cases { display:flex; flex-direction:column; gap:1px; background:var(--border); }
+  .before-after-extra { background:var(--mid); border-top:1px solid var(--border); }
+  .before-after-extra .ba-cases { margin-top:0; }
   .ba-card {
     background:var(--card); overflow:hidden;
   }
+  details.ba-card-accordion {
+    background:var(--card);
+    overflow:hidden;
+  }
+  .ba-card-summary {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:0.75rem;
+    padding:0.85rem 1.15rem;
+    cursor:pointer;
+    list-style:none;
+    border-bottom:1px solid var(--border);
+    font-family:'Noto Sans KR', sans-serif;
+  }
+  .ba-card-summary::-webkit-details-marker { display:none; }
+  details.ba-card-accordion > .ba-card-summary::marker { content:''; }
+  .ba-card-summary-text { flex:1; min-width:0; text-align:left; }
+  .ba-card-summary .ba-info-name { margin-bottom:0.15rem; font-size:0.84rem; }
+  .ba-card-summary .ba-info-sub { font-size:0.68rem; color:var(--muted); font-weight:300; }
+  .ba-sum-chev {
+    flex-shrink:0;
+    width:1.85rem;
+    height:1.85rem;
+    border:1px solid var(--border-light);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.55rem;
+    letter-spacing:0.02em;
+    color:var(--muted);
+    transition:transform 0.22s ease, border-color 0.2s;
+  }
+  details.ba-card-accordion[open] .ba-sum-chev { transform:rotate(180deg); }
+  .ba-card-summary:hover .ba-sum-chev { border-color:var(--accent2); color:var(--text); }
+  .ba-card-panel { background:var(--card); }
   .ba-slider-wrap {
     position:relative; overflow:hidden;
     aspect-ratio:3/4; user-select:none; touch-action:pan-y;
@@ -373,6 +412,61 @@
     display:block; pointer-events:none; user-select:none;
   }
   .ba-before-label, .ba-after-label { z-index:2; }
+
+  /* 멀티 페어(pairs 2+): 구도가 다른 사진에 맞춰 드래그 슬라이더 대신 고정 분할 */
+  .ba-card--multi .ba-slider-wrap {
+    display:flex;
+    flex-direction:row;
+    align-items:stretch;
+    touch-action:auto;
+  }
+  .ba-card--multi .ba-before {
+    position:relative;
+    flex:1;
+    min-width:0;
+    width:50%;
+    height:100%;
+  }
+  .ba-card--multi .ba-after-clip {
+    position:relative;
+    flex:1;
+    min-width:0;
+    width:50%;
+    height:100%;
+    clip-path:none !important;
+    overflow:hidden;
+    border-left:1px solid var(--border);
+  }
+  .ba-card--multi .ba-after {
+    position:absolute;
+    inset:0;
+  }
+  .ba-card--multi .ba-img {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center top;
+  }
+  .ba-card--multi .ba-divider { display:none !important; }
+  @media (max-width:440px) {
+    .ba-card--multi .ba-slider-wrap {
+      flex-direction:column;
+      aspect-ratio:3/5;
+    }
+    .ba-card--multi .ba-before,
+    .ba-card--multi .ba-after-clip {
+      width:100%;
+      flex:1;
+      min-height:0;
+    }
+    .ba-card--multi .ba-after-clip {
+      border-left:none;
+      border-top:1px solid var(--border);
+    }
+  }
+
   .ba-icon-grid {
     display:grid; grid-template-columns:repeat(3,50px);
     gap:10px; align-items:center; justify-content:center;
@@ -898,8 +992,9 @@
   <div class="fade-up">
     <div class="section-label">비포앤애프터</div>
     <h2 class="section-title">실제 회원<br>변화 결과</h2>
-    <p style="color:var(--muted); line-height:1.85; margin-bottom:1rem; font-size:0.84rem; font-weight:300;">슬라이더를 드래그하여 변화 전후를 비교해 보세요.</p>
+    <p style="color:var(--muted); line-height:1.85; margin-bottom:1rem; font-size:0.84rem; font-weight:300;">한 세트(전·후 2장)는 슬라이더로 드래그해 비교할 수 있고, 여러 차수 사진이 있는 경우에는 전·후를 나란히 고정해 보여 드립니다.</p>
     <p class="ba-notice fade-up">일부 전·후 이미지는 레이아웃 확인용입니다. 실제 회원 변화 사진은 동의를 받은 뒤에만 교체·게시합니다.</p>
+    <p class="ba-accordion-hint fade-up" style="font-size:0.7rem;color:var(--muted2);line-height:1.55;margin:-0.35rem 0 1rem;font-weight:300;">회원 이름 줄을 누르면 전·후 사진 영역을 접었다 펼칠 수 있습니다.</p>
   </div>
   <div class="ba-tabs fade-up">
     <button class="ba-tab active" data-filter="all">전체</button>
@@ -907,8 +1002,16 @@
     <button class="ba-tab" data-filter="bulk">근육</button>
     <button class="ba-tab" data-filter="rehab">교정</button>
   </div>
-  <div class="ba-cases">
-    <div class="ba-card fade-up" data-category="diet">
+  <div class="ba-cases" id="main-ba-cases">
+    <details class="ba-card ba-card-accordion fade-up" open data-category="diet">
+      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
+        <div class="ba-card-summary-text">
+          <div class="ba-info-name" data-ba-member>주00 회원님 · 여성 · 28세</div>
+          <div class="ba-info-sub">3개월 체지방 감량 프로그램</div>
+        </div>
+        <span class="ba-sum-chev">▼</span>
+      </summary>
+      <div class="ba-card-panel">
       <div class="ba-slider-wrap" id="slider1">
         <div class="ba-before">
           <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
@@ -932,9 +1035,18 @@
           <div class="ba-info-stat"><div class="ba-info-stat-val">90일</div><div class="ba-info-stat-lbl">기간</div></div>
         </div>
       </div>
-    </div>
+      </div>
+    </details>
 
-    <div class="ba-card fade-up" data-category="bulk">
+    <details class="ba-card ba-card-accordion fade-up" open data-category="bulk">
+      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
+        <div class="ba-card-summary-text">
+          <div class="ba-info-name" data-ba-member>박00 회원님</div>
+          <div class="ba-info-sub">바디프로필 준비</div>
+        </div>
+        <span class="ba-sum-chev">▼</span>
+      </summary>
+      <div class="ba-card-panel">
       <div class="ba-slider-wrap" id="slider2">
         <div class="ba-before">
           <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
@@ -957,9 +1069,18 @@
           <div class="ba-info-stat"><div class="ba-info-stat-val">180일</div><div class="ba-info-stat-lbl">기간</div></div>
         </div>
       </div>
-    </div>
+      </div>
+    </details>
 
-    <div class="ba-card fade-up" data-category="rehab">
+    <details class="ba-card ba-card-accordion fade-up" open data-category="rehab">
+      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
+        <div class="ba-card-summary-text">
+          <div class="ba-info-name" data-ba-member>엄00 회원님 · 여성 · 42세</div>
+          <div class="ba-info-sub">4개월 체형교정 & 자세개선</div>
+        </div>
+        <span class="ba-sum-chev">▼</span>
+      </summary>
+      <div class="ba-card-panel">
       <div class="ba-slider-wrap" id="slider3">
         <div class="ba-before">
           <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
@@ -983,7 +1104,78 @@
           <div class="ba-info-stat"><div class="ba-info-stat-val">120일</div><div class="ba-info-stat-lbl">기간</div></div>
         </div>
       </div>
-    </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- 추가 비포앤애프터: 윤OO · 이OO -->
+<section class="before-after before-after-extra" id="results-extra">
+  <div class="fade-up">
+    <div class="section-label">추가 전후</div>
+    <h2 class="section-title">더 많은<br>회원 변화</h2>
+    <p style="color:var(--muted); line-height:1.85; margin-bottom:1rem; font-size:0.84rem; font-weight:300;">동의를 받은 추가 전·후 사진입니다. 슬라이더를 드래그해 비교해 보세요.</p>
+    <p class="ba-accordion-hint fade-up" style="font-size:0.7rem;color:var(--muted2);line-height:1.55;margin:-0.35rem 0 1rem;font-weight:300;">이름 줄을 누르면 사진 영역을 접었다 펼칠 수 있습니다.</p>
+  </div>
+  <div class="ba-cases ba-cases--extra fade-up" id="spotlight-cases">
+    <details class="ba-card ba-card-accordion fade-up" open>
+      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
+        <div class="ba-card-summary-text">
+          <div class="ba-info-name" data-spotlight-member>윤OO 회원님</div>
+          <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
+        </div>
+        <span class="ba-sum-chev">▼</span>
+      </summary>
+      <div class="ba-card-panel">
+      <div class="ba-slider-wrap" id="slider4">
+        <div class="ba-before">
+          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
+          <div class="ba-before-label">BEFORE</div>
+        </div>
+        <div class="ba-after-clip" id="after4" style="clip-path:inset(0 50% 0 0);">
+          <div class="ba-after" style="position:absolute;inset:0;">
+            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
+            <div class="ba-after-label">AFTER</div>
+          </div>
+        </div>
+        <div class="ba-divider" id="div4" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
+      </div>
+      <div class="ba-pair-host"></div>
+      <div class="ba-info">
+        <div class="ba-info-name" data-spotlight-member>윤OO 회원님</div>
+        <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
+      </div>
+      </div>
+    </details>
+    <details class="ba-card ba-card-accordion fade-up" open>
+      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
+        <div class="ba-card-summary-text">
+          <div class="ba-info-name" data-spotlight-member>이OO 회원님</div>
+          <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
+        </div>
+        <span class="ba-sum-chev">▼</span>
+      </summary>
+      <div class="ba-card-panel">
+      <div class="ba-slider-wrap" id="slider5">
+        <div class="ba-before">
+          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
+          <div class="ba-before-label">BEFORE</div>
+        </div>
+        <div class="ba-after-clip" id="after5" style="clip-path:inset(0 50% 0 0);">
+          <div class="ba-after" style="position:absolute;inset:0;">
+            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
+            <div class="ba-after-label">AFTER</div>
+          </div>
+        </div>
+        <div class="ba-divider" id="div5" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
+      </div>
+      <div class="ba-pair-host"></div>
+      <div class="ba-info">
+        <div class="ba-info-name" data-spotlight-member>이OO 회원님</div>
+        <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
+      </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -1285,7 +1477,7 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
 // ── assets/contents 비포·애프터 인덱스 (파일명: {코드}비포*.jpg ↔ {코드}애프터*.jpg) ──
-// UI: pairs 없음 또는 pairs 1개 → 슬라이더만. pairs 2개 이상 → 각 카드 .ba-pair-host 에 N차 버튼 + 썸네일 자동 생성.
+// UI: pairs 없음·1개 → 드래그 슬라이더. pairs 2개 이상 → 고정 분할(좌/우) + .ba-pair-host 에 N차·썸네일 자동 생성(슬라이더 없음).
 var BA_CONTENTS_INDEX = {
   base: 'assets/contents/',
   slides: [
@@ -1308,6 +1500,26 @@ var BA_CONTENTS_INDEX = {
     '예림바프1.jpg',
   ],
 };
+/** #results-extra — 윤OO·이OO 등 추가 전후 (pairs 2개 이상이면 메인과 동일 UI)
+ *  슬라이더 DOM: 화면 왼쪽 = after 슬롯, 오른쪽 = before 슬롯 → 시간순(좌 비포·우 에프터)이 되도록 파일을 교차 지정함. */
+var BA_SPOTLIGHT_INDEX = {
+  items: [
+    {
+      code: '윤OO',
+      before: 'assets/contents/윤OO 에프터.jpeg',
+      after: 'assets/contents/윤OO 비포.jpeg',
+      member: '윤OO 회원님',
+      infoSub: '추가 전·후',
+    },
+    {
+      code: '이OO',
+      before: 'assets/contents/이OO 에프터.jpeg',
+      after: 'assets/contents/이OO 비포.jpeg',
+      member: '이OO 회원님',
+      infoSub: '추가 전·후',
+    },
+  ],
+};
 /** assets/contents — 파일명에 「후기」 포함, 표시 순서 1→4 */
 var REVIEW_PHOTOS_INDEX = [
   'assets/contents/예림 pt후기 1.jpg',
@@ -1320,7 +1532,7 @@ function baEncPath(relPath) {
   return relPath.split('/').map(function (seg) { return encodeURIComponent(seg); }).join('/');
 }
 function applyBaContentsIndex() {
-  var root = document.querySelector('.ba-cases');
+  var root = document.getElementById('main-ba-cases');
   if (!root || !BA_CONTENTS_INDEX.slides) return;
   var cards = root.querySelectorAll('.ba-card');
   BA_CONTENTS_INDEX.slides.forEach(function (row, i) {
@@ -1344,20 +1556,52 @@ function applyBaContentsIndex() {
       afterImg.alt = (row.code || '') + ' 회원 변화 후';
     }
     if (row.category) card.dataset.category = row.category;
-    var nameEl = card.querySelector('[data-ba-member]');
-    if (nameEl && row.member) nameEl.textContent = row.member;
-    var subEl = card.querySelector('.ba-info-sub');
-    if (subEl && row.infoSub) subEl.textContent = row.infoSub;
+    if (row.member) {
+      card.querySelectorAll('[data-ba-member]').forEach(function (el) { el.textContent = row.member; });
+    }
+    if (row.infoSub) {
+      card.querySelectorAll('.ba-info-sub').forEach(function (el) { el.textContent = row.infoSub; });
+    }
   });
 }
 applyBaContentsIndex();
 
-/** pairs.length ≤ 1 → 슬라이더만. pairs.length > 1 → N차 버튼 + 비포·애프터 썸네일 그리드(2×N) */
-function initBaMultiPairCards() {
-  var root = document.querySelector('.ba-cases');
-  if (!root || !BA_CONTENTS_INDEX.slides) return;
+function applyBaSpotlightIndex() {
+  var root = document.getElementById('spotlight-cases');
+  if (!root || !BA_SPOTLIGHT_INDEX || !BA_SPOTLIGHT_INDEX.items) return;
   var cards = root.querySelectorAll('.ba-card');
-  BA_CONTENTS_INDEX.slides.forEach(function (row, i) {
+  BA_SPOTLIGHT_INDEX.items.forEach(function (row, i) {
+    var card = cards[i];
+    if (!card) return;
+    var pair0 = null;
+    if (row.pairs && row.pairs.length) pair0 = row.pairs[0];
+    else if (row.before && row.after) pair0 = { before: row.before, after: row.after };
+    if (!pair0) return;
+    var beforeImg = card.querySelector('.ba-before .ba-img');
+    var afterImg = card.querySelector('.ba-after .ba-img');
+    if (beforeImg) {
+      beforeImg.src = baEncPath(pair0.before);
+      beforeImg.alt = (row.code || '') + ' 회원 변화 전';
+    }
+    if (afterImg) {
+      afterImg.src = baEncPath(pair0.after);
+      afterImg.alt = (row.code || '') + ' 회원 변화 후';
+    }
+    if (row.member) {
+      card.querySelectorAll('[data-spotlight-member]').forEach(function (el) { el.textContent = row.member; });
+    }
+    if (row.infoSub) {
+      card.querySelectorAll('[data-spotlight-sub]').forEach(function (el) { el.textContent = row.infoSub; });
+    }
+  });
+}
+applyBaSpotlightIndex();
+
+/** pairs.length ≤ 1 → 슬라이더만. pairs.length > 1 → N차 버튼 + 비포·애프터 썸네일 그리드(2×N) */
+function initBaMultiPairForRoot(root, slides) {
+  if (!root || !slides || !slides.length) return;
+  var cards = root.querySelectorAll('.ba-card');
+  slides.forEach(function (row, i) {
     var card = cards[i];
     var host = card ? card.querySelector('.ba-pair-host') : null;
     if (!card || !host) return;
@@ -1466,6 +1710,10 @@ function initBaMultiPairCards() {
     });
   });
 }
+function initBaMultiPairCards() {
+  initBaMultiPairForRoot(document.getElementById('main-ba-cases'), BA_CONTENTS_INDEX.slides);
+  initBaMultiPairForRoot(document.getElementById('spotlight-cases'), BA_SPOTLIGHT_INDEX.items);
+}
 initBaMultiPairCards();
 
 function initReviewPhotoGallery() {
@@ -1516,6 +1764,7 @@ initReviewPhotoGallery();
 // ── BEFORE/AFTER SLIDERS ──
 function initSlider(wId, aId, dId) {
   const wrap = document.getElementById(wId);
+  if (wrap && wrap.closest('.ba-card--multi')) return;
   const clip = document.getElementById(aId);
   const div  = document.getElementById(dId);
   const handle = div ? div.querySelector('.ba-divider-handle') : null;
@@ -1542,14 +1791,16 @@ function initSlider(wId, aId, dId) {
 initSlider('slider1','after1','div1');
 initSlider('slider2','after2','div2');
 initSlider('slider3','after3','div3');
+initSlider('slider4','after4','div4');
+initSlider('slider5','after5','div5');
 
-// ── BA TABS ──
+// ── BA TABS (메인 #results 카드만 필터; 추가 전후 섹션은 제외) ──
 document.querySelectorAll('.ba-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.ba-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     const f = tab.dataset.filter;
-    document.querySelectorAll('.ba-card').forEach(c => {
+    document.querySelectorAll('#results .ba-card').forEach(c => {
       c.style.display = (f==='all'||c.dataset.category===f) ? 'block' : 'none';
     });
   });
