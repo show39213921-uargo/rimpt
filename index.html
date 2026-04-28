@@ -307,257 +307,113 @@
     font-size:0.85rem; color:var(--muted2); min-width:1.4rem; flex-shrink:0; padding-top:1px;
   }
 
-  /* ── BEFORE AFTER ── */
-  .before-after { background:var(--dark); }
-  .ba-tabs {
-    display:flex; gap:0; margin-bottom:2rem;
-    border:1px solid var(--border); overflow:hidden;
+  /* ── 미갤러리 (#body-profile) + #results 전·후 슬라이더 ── */
+  .mi-lead {
+    color:var(--muted); font-size:0.82rem; line-height:1.75;
+    margin-bottom:0.4rem; font-weight:300;
   }
-  .ba-tab {
-    flex:1; padding:0.7rem 0.3rem;
-    background:transparent; color:var(--muted); cursor:pointer;
-    font-size:0.65rem; letter-spacing:0.06em; text-transform:uppercase;
-    border:none; border-right:1px solid var(--border); transition:all 0.2s;
-    font-family:'Noto Sans KR', sans-serif; font-weight:400;
-    text-align:center;
-  }
-  .ba-tab:last-child { border-right:none; }
-  .ba-tab.active { background:var(--accent); color:var(--dark); font-weight:700; }
-  .ba-notice {
-    font-size:0.68rem; line-height:1.65; color:var(--muted2);
-    background:rgba(255,255,255,0.03); border:1px solid var(--border);
-    padding:0.75rem 1rem; margin-bottom:1.2rem; font-weight:300;
-  }
-  .ba-cases { display:flex; flex-direction:column; gap:1px; background:var(--border); }
-  .before-after-extra { background:var(--mid); border-top:1px solid var(--border); }
-  .before-after-extra .ba-cases { margin-top:0; }
-  .ba-card {
-    background:var(--card); overflow:hidden;
-  }
-  details.ba-card-accordion {
-    background:var(--card);
+  .mi-gallery {
+    margin-top:1.25rem; background:var(--card); border:1px solid var(--border); border-radius:12px;
     overflow:hidden;
   }
-  .ba-card-summary {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:0.75rem;
-    padding:0.85rem 1.15rem;
-    cursor:pointer;
-    list-style:none;
-    border-bottom:1px solid var(--border);
-    font-family:'Noto Sans KR', sans-serif;
-  }
-  .ba-card-summary::-webkit-details-marker { display:none; }
-  details.ba-card-accordion > .ba-card-summary::marker { content:''; }
-  .ba-card-summary-text { flex:1; min-width:0; text-align:left; }
-  .ba-card-summary .ba-info-name { margin-bottom:0.15rem; font-size:0.84rem; }
-  .ba-card-summary .ba-info-sub { font-size:0.68rem; color:var(--muted); font-weight:300; }
-  .ba-sum-chev {
-    flex-shrink:0;
-    width:1.85rem;
-    height:1.85rem;
-    border:1px solid var(--border-light);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:0.55rem;
-    letter-spacing:0.02em;
-    color:var(--muted);
-    transition:transform 0.22s ease, border-color 0.2s;
-  }
-  details.ba-card-accordion[open] .ba-sum-chev { transform:rotate(180deg); }
-  .ba-card-summary:hover .ba-sum-chev { border-color:var(--accent2); color:var(--text); }
-  .ba-card-panel { background:var(--card); }
-  .ba-slider-wrap {
-    position:relative; overflow:hidden;
-    aspect-ratio:3/4; user-select:none; touch-action:pan-y;
-  }
-  .ba-before, .ba-after {
-    position:absolute; inset:0;
+  .mi-main-wrap {
+    position:relative; aspect-ratio:3/4; background:var(--mid);
     display:flex; align-items:center; justify-content:center;
   }
-  .ba-before { background:var(--mid); }
-  .ba-after { background:#181818; }
-  .ba-before-label, .ba-after-label {
-    position:absolute; bottom:0.8rem;
-    font-size:0.6rem; letter-spacing:0.16em;
-    text-transform:uppercase; padding:0.28rem 0.7rem;
-    font-weight:500;
+  .mi-main-img {
+    width:100%; height:100%; object-fit:contain; object-position:center;
+    display:block; background:#0a0a0a;
   }
-  .ba-before-label { left:0.8rem; border:1px solid var(--border-light); color:var(--muted); }
-  .ba-after-label { right:0.8rem; background:var(--accent); color:var(--dark); }
-  .ba-divider {
-    position:absolute; top:0; bottom:0; width:1px;
-    background:var(--accent); z-index:10;
-    display:flex; align-items:center; justify-content:center;
-    pointer-events:none;
+  .mi-main-badge {
+    position:absolute; bottom:0.65rem; left:50%; transform:translateX(-50%);
+    font-size:0.65rem; color:var(--text); background:rgba(0,0,0,0.65);
+    padding:0.28rem 0.65rem; border-radius:999px; border:1px solid var(--border-light);
+    letter-spacing:0.04em;
   }
-  .ba-divider-handle {
-    width:36px; height:36px; border-radius:50%;
-    background:var(--dark); border:1px solid var(--accent);
-    display:flex; align-items:center; justify-content:center;
-    color:var(--accent); font-size:0.7rem; position:absolute;
-    box-shadow: 0 0 12px rgba(0,0,0,0.8);
-    cursor:ew-resize;
-    pointer-events:auto;
-    touch-action:none;
+  .mi-thumb-row-wrap {
+    display:flex; align-items:stretch; gap:0; border-top:1px solid var(--border);
+    background:var(--darker);
   }
-  .ba-after-clip { position:absolute; inset:0; overflow:hidden; }
-  .ba-img {
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; object-position:center top;
-    display:block; pointer-events:none; user-select:none;
+  .mi-nav {
+    flex:0 0 40px; border:none; background:var(--card); color:var(--muted);
+    font-size:1.25rem; cursor:pointer; font-family:'Noto Sans KR', sans-serif;
   }
-  .ba-before-label, .ba-after-label { z-index:2; }
-
-  /* 멀티 페어(pairs 2+): 구도가 다른 사진에 맞춰 드래그 슬라이더 대신 고정 분할 */
-  .ba-card--multi .ba-slider-wrap {
-    display:flex;
-    flex-direction:row;
-    align-items:stretch;
-    touch-action:auto;
+  .mi-nav--prev { border-right:1px solid var(--border); }
+  .mi-nav--next { border-left:1px solid var(--border); }
+  .mi-nav:active { color:var(--accent); }
+  .mi-thumb-scroll {
+    flex:1; min-width:0; display:flex; gap:0.4rem; padding:0.55rem 0.5rem;
+    overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
   }
-  .ba-card--multi .ba-before {
-    position:relative;
-    flex:1;
-    min-width:0;
-    width:50%;
-    height:100%;
-  }
-  .ba-card--multi .ba-after-clip {
-    position:relative;
-    flex:1;
-    min-width:0;
-    width:50%;
-    height:100%;
-    clip-path:none !important;
-    overflow:hidden;
-    border-left:1px solid var(--border);
-  }
-  .ba-card--multi .ba-after {
-    position:absolute;
-    inset:0;
-  }
-  .ba-card--multi .ba-img {
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center top;
-  }
-  .ba-card--multi .ba-divider { display:none !important; }
-  @media (max-width:440px) {
-    .ba-card--multi .ba-slider-wrap {
-      flex-direction:column;
-      aspect-ratio:3/5;
-    }
-    .ba-card--multi .ba-before,
-    .ba-card--multi .ba-after-clip {
-      width:100%;
-      flex:1;
-      min-height:0;
-    }
-    .ba-card--multi .ba-after-clip {
-      border-left:none;
-      border-top:1px solid var(--border);
-    }
-  }
-
-  .ba-icon-grid {
-    display:grid; grid-template-columns:repeat(3,50px);
-    gap:10px; align-items:center; justify-content:center;
-    width:100%; height:100%;
-  }
-  .ba-icon-cell { width:50px; height:50px; }
-  .ba-icon-cell.d1 { background:rgba(255,255,255,0.03); }
-  .ba-icon-cell.d2 { background:rgba(255,255,255,0.05); }
-  .ba-icon-cell.l1 { background:rgba(255,255,255,0.10); }
-  .ba-icon-cell.l2 { background:rgba(255,255,255,0.20); }
-  .ba-icon-cell.l3 { background:rgba(255,255,255,0.32); }
-  .ba-info { padding:1.1rem 1.2rem; border-top:1px solid var(--border); }
-  .ba-info-name { font-weight:500; font-size:0.84rem; margin-bottom:0.15rem; }
-  .ba-info-sub { font-size:0.7rem; color:var(--muted); font-weight:300; }
-  .ba-info-stats { display:flex; gap:1.5rem; margin-top:0.8rem; }
-  .ba-info-stat-val {
-    font-family:'Cormorant Garamond', serif;
-    font-size:1.5rem; font-weight:400; color:var(--accent);
-  }
-  .ba-info-stat-lbl { font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
-
-  .ba-pair-strip {
-    padding:0.65rem 1rem 0.75rem;
-    border-bottom:1px solid var(--border);
-    background:rgba(0,0,0,0.22);
-  }
-  .ba-pair-toggle {
-    display:flex;
-    gap:0.4rem;
-    margin-bottom:0.55rem;
-  }
-  .ba-pair-btn {
-    flex:1;
-    font-size:0.62rem;
-    letter-spacing:0.06em;
-    padding:0.45rem 0.35rem;
-    border:1px solid var(--border);
-    background:transparent;
-    color:var(--muted);
-    cursor:pointer;
-    font-family:'Noto Sans KR', sans-serif;
-    border-radius:8px;
-    transition:border-color 0.2s, color 0.2s, background 0.2s;
-  }
-  .ba-pair-btn.active {
-    border-color:var(--accent);
-    color:var(--text);
-    background:rgba(255,255,255,0.04);
-  }
-  .ba-mini-grid {
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:0.4rem;
-  }
-  .ba-mini-grid.ba-mini-grid--many {
-    grid-template-columns:repeat(auto-fit, minmax(3.25rem, 1fr));
-  }
-  .ba-pair-host:empty { display:none; }
-  .ba-mini-tile {
-    position:relative;
-    margin:0;
-    padding:0;
-    border:2px solid transparent;
-    border-radius:8px;
-    overflow:hidden;
-    cursor:pointer;
-    background:#0f0f0f;
-    aspect-ratio:1;
+  .mi-thumb-scroll::-webkit-scrollbar { height:4px; }
+  .mi-thumb-scroll::-webkit-scrollbar-thumb { background:var(--border-light); border-radius:4px; }
+  .mi-thumb {
+    flex:0 0 auto; width:3.35rem; height:4.2rem; padding:0; border:2px solid transparent;
+    border-radius:8px; overflow:hidden; cursor:pointer; background:var(--mid);
     transition:border-color 0.2s;
   }
-  .ba-mini-tile.active { border-color:var(--accent); }
-  .ba-mini-tile:focus-visible { outline:2px solid var(--accent2); outline-offset:2px; }
-  .ba-mini-lbl {
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:1;
-    font-size:0.48rem;
-    letter-spacing:0.04em;
-    padding:0.2rem 0.25rem;
-    background:rgba(0,0,0,0.72);
-    color:#c8c8c8;
-    text-align:center;
+  .mi-thumb.active { border-color:var(--accent); }
+  .mi-thumb:focus-visible { outline:2px solid var(--accent2); outline-offset:2px; }
+  .mi-thumb img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+
+  /* ── #results 전·후 슬라이더 (member-results.html 과 동일 패턴) ── */
+  .results-ba .results-ba-slider-host {
+    position:relative; width:100%; aspect-ratio:3/4; background:var(--mid);
+    overflow:hidden;
   }
-  .ba-mini-img {
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center top;
+  .results-ba .ba-slider-wrap {
+    position:absolute; inset:0; overflow:hidden; user-select:none; touch-action:pan-y;
+  }
+  .results-ba .ba-before, .results-ba .ba-after {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  }
+  .results-ba .ba-before { background:var(--mid); }
+  .results-ba .ba-after { background:#181818; }
+  .results-ba .ba-before-label, .results-ba .ba-after-label {
+    position:absolute; bottom:0.65rem; font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase;
+    padding:0.22rem 0.55rem; font-weight:500; z-index:2;
+  }
+  .results-ba .ba-before-label { left:0.65rem; border:1px solid var(--border-light); color:var(--muted); }
+  .results-ba .ba-after-label { right:0.65rem; background:var(--accent); color:var(--dark); }
+  .results-ba .ba-divider {
+    position:absolute; top:0; bottom:0; width:1px; background:var(--accent); z-index:10;
+    display:flex; align-items:center; justify-content:center; pointer-events:none;
+  }
+  .results-ba .ba-divider-handle {
+    width:34px; height:34px; border-radius:50%; background:var(--dark); border:1px solid var(--accent);
+    display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:0.65rem;
+    position:absolute; box-shadow:0 0 10px rgba(0,0,0,0.75); cursor:ew-resize; pointer-events:auto; touch-action:none;
+  }
+  .results-ba .ba-after-clip { position:absolute; inset:0; overflow:hidden; }
+  .results-ba .ba-img {
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top;
+    display:block; pointer-events:none; user-select:none;
+  }
+  .results-ba .results-ba-slider-host .mi-main-badge {
+    position:absolute; bottom:0.55rem; left:50%; transform:translateX(-50%); z-index:12;
+    font-size:0.65rem; color:var(--text); background:rgba(0,0,0,0.65);
+    padding:0.28rem 0.65rem; border-radius:999px; border:1px solid var(--border-light);
+    letter-spacing:0.04em;
+  }
+  .results-ba .results-ba-info {
+    padding:1rem 1rem 1.15rem;
+    border-top:1px solid var(--border);
+    background:var(--darker);
+    text-align:left;
+  }
+  .results-ba .results-ba-info-name { font-weight:500; font-size:0.88rem; margin-bottom:0.2rem; color:var(--text); }
+  .results-ba .results-ba-info-sub { font-size:0.74rem; color:var(--muted); font-weight:300; line-height:1.45; }
+  .results-ba .results-ba-stats {
+    display:flex; gap:1.35rem; margin-top:0.8rem; flex-wrap:wrap;
+  }
+  .results-ba .results-ba-stat { min-width:3.2rem; }
+  .results-ba .results-ba-stat-val {
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.45rem; font-weight:400; color:var(--accent); line-height:1.1;
+  }
+  .results-ba .results-ba-stat-lbl {
+    font-size:0.58rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:0.15rem;
   }
 
   /* ── PROGRAMS ── */
@@ -662,6 +518,30 @@
   }
   .review-author-name { font-weight:500; font-size:0.84rem; color:var(--text); }
   .review-author-meta { font-size:0.7rem; color:var(--muted); font-weight:300; }
+  /* ── BODY PROFILE (미갤러리 + body-profile.html 링크) ── */
+  .body-profile { background:var(--dark); border-top:1px solid var(--border); }
+  .bp-lead {
+    color:var(--muted); font-size:0.82rem; line-height:1.75;
+    margin-bottom:1.2rem; font-weight:300;
+  }
+  .bp-cta {
+    display:block;
+    width:100%;
+    padding:1rem 1.2rem;
+    border:none;
+    background:var(--accent);
+    color:var(--dark);
+    font-weight:700;
+    font-size:0.75rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-family:'Noto Sans KR', sans-serif;
+    text-align:center;
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .bp-cta:hover { opacity:0.92; }
+
   .reviews-dots { display:flex; gap:0.5rem; margin-top:2rem; justify-content:center; }
   .rev-dot {
     width:18px; height:2px; background:var(--border-light);
@@ -907,6 +787,7 @@
     <button type="button" class="nav-link-btn" onclick="location.href='remote-coaching.html'">원격 코칭</button>
     -->
     <button type="button" class="nav-link-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">소개·이력</button>
+    <button type="button" class="nav-link-btn" onclick="document.getElementById('body-profile').scrollIntoView({behavior:'smooth'})">바디프로필</button>
     <button type="button" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담</button>
   </div>
 </nav>
@@ -924,8 +805,9 @@
     <p class="hero-desc">운동 습관부터 식단 관리까지, 체계적인 방식으로 회원님만의 맞춤 트레이닝을 제공합니다.</p>
     <p class="hero-trust">사진·후기는 회원 동의 후에만 게시합니다. 부담 없이 상담부터 편하게 요청해 주세요.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">변화 결과 보기</button>
-      <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담 신청</button>
+      <button type="button" class="btn-primary" onclick="location.href='member-results.html'">비포·애프터 보기</button>
+      <button type="button" class="btn-outline" onclick="document.getElementById('body-profile').scrollIntoView({behavior:'smooth'})">바디프로필</button>
+      <button type="button" class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담 신청</button>
     </div>
   </div>
 </section>
@@ -987,195 +869,41 @@
   </div>
 </section>
 
-<!-- BEFORE AFTER -->
-<section class="before-after" id="results">
+<!-- 전·후 미리보기 — 슬라이더·상세는 member-results.html -->
+<section class="body-profile before-after" id="results">
   <div class="fade-up">
-    <div class="section-label">비포앤애프터</div>
+    <div class="section-label">Before / After</div>
     <h2 class="section-title">실제 회원<br>변화 결과</h2>
-    <p style="color:var(--muted); line-height:1.85; margin-bottom:1rem; font-size:0.84rem; font-weight:300;">한 세트(전·후 2장)는 슬라이더로 드래그해 비교할 수 있고, 여러 차수 사진이 있는 경우에는 전·후를 나란히 고정해 보여 드립니다.</p>
-    <p class="ba-notice fade-up">일부 전·후 이미지는 레이아웃 확인용입니다. 실제 회원 변화 사진은 동의를 받은 뒤에만 교체·게시합니다.</p>
-    <p class="ba-accordion-hint fade-up" style="font-size:0.7rem;color:var(--muted2);line-height:1.55;margin:-0.35rem 0 1rem;font-weight:300;">회원 이름 줄을 누르면 전·후 사진 영역을 접었다 펼칠 수 있습니다.</p>
-  </div>
-  <div class="ba-tabs fade-up">
-    <button class="ba-tab active" data-filter="all">전체</button>
-    <button class="ba-tab" data-filter="diet">감량</button>
-    <button class="ba-tab" data-filter="bulk">근육</button>
-    <button class="ba-tab" data-filter="rehab">교정</button>
-  </div>
-  <div class="ba-cases" id="main-ba-cases">
-    <details class="ba-card ba-card-accordion fade-up" open data-category="diet">
-      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
-        <div class="ba-card-summary-text">
-          <div class="ba-info-name" data-ba-member>주00 회원님 · 여성 · 28세</div>
-          <div class="ba-info-sub">3개월 체지방 감량 프로그램</div>
-        </div>
-        <span class="ba-sum-chev">▼</span>
-      </summary>
-      <div class="ba-card-panel">
-      <div class="ba-slider-wrap" id="slider1">
-        <div class="ba-before">
-          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
-          <div class="ba-before-label">BEFORE</div>
-        </div>
-        <div class="ba-after-clip" id="after1" style="clip-path:inset(0 50% 0 0);">
-          <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
-            <div class="ba-after-label">AFTER</div>
+    <p class="bp-lead fade-up">한 세트(전·후 2장)는 슬라이더를 드래그해 비교할 수 있습니다. 사진은 회원 동의 후에만 게시합니다.</p>
+    <div class="mi-gallery results-ba fade-up" id="results-ba-root" aria-label="전·후 비교 미리보기">
+      <div class="results-ba-slider-host">
+        <div class="ba-slider-wrap" id="index-ba-slider-wrap">
+          <div class="ba-before">
+            <img class="ba-img" id="index-ba-before-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" decoding="async">
+            <div class="ba-before-label">BEFORE</div>
           </div>
-        </div>
-        <div class="ba-divider" id="div1" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
-      </div>
-      <div class="ba-pair-host"></div>
-      <div class="ba-info">
-        <div class="ba-info-name" data-ba-member>주00 회원님 · 여성 · 28세</div>
-        <div class="ba-info-sub">3개월 체지방 감량 프로그램</div>
-        <div class="ba-info-stats">
-          <div class="ba-info-stat"><div class="ba-info-stat-val">-12kg</div><div class="ba-info-stat-lbl">체중</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">-9kg</div><div class="ba-info-stat-lbl">체지방량</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">90일</div><div class="ba-info-stat-lbl">기간</div></div>
-        </div>
-      </div>
-      </div>
-    </details>
-
-    <details class="ba-card ba-card-accordion fade-up" open data-category="bulk">
-      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
-        <div class="ba-card-summary-text">
-          <div class="ba-info-name" data-ba-member>박00 회원님</div>
-          <div class="ba-info-sub">바디프로필 준비</div>
-        </div>
-        <span class="ba-sum-chev">▼</span>
-      </summary>
-      <div class="ba-card-panel">
-      <div class="ba-slider-wrap" id="slider2">
-        <div class="ba-before">
-          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
-          <div class="ba-before-label">BEFORE</div>
-        </div>
-        <div class="ba-after-clip" id="after2" style="clip-path:inset(0 50% 0 0);">
-          <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
-            <div class="ba-after-label">AFTER</div>
+          <div class="ba-after-clip" id="index-ba-after-clip" style="clip-path:inset(0 50% 0 0);">
+            <div class="ba-after" style="position:absolute;inset:0;">
+              <img class="ba-img" id="index-ba-after-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" decoding="async">
+              <div class="ba-after-label">AFTER</div>
+            </div>
           </div>
+          <div class="ba-divider" id="index-ba-divider" style="left:50%;"><div class="ba-divider-handle" aria-label="전·후 비교 슬라이더">⟺</div></div>
         </div>
-        <div class="ba-divider" id="div2" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
+        <div class="mi-main-badge" id="index-ba-case-badge" aria-live="polite"></div>
       </div>
-      <div class="ba-pair-host"></div>
-      <div class="ba-info">
-        <div class="ba-info-name" data-ba-member>박00 회원님</div>
-        <div class="ba-info-sub">바디프로필 준비</div>
-        <div class="ba-info-stats">
-          <div class="ba-info-stat"><div class="ba-info-stat-val">-15kg</div><div class="ba-info-stat-lbl">체중</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">180일</div><div class="ba-info-stat-lbl">기간</div></div>
-        </div>
+      <div class="mi-thumb-row-wrap">
+        <button type="button" class="mi-nav mi-nav--prev" id="results-ba-prev" aria-label="이전 케이스">‹</button>
+        <div class="mi-thumb-scroll" id="results-ba-thumbs" role="tablist" aria-label="회원 전·후 케이스 선택"></div>
+        <button type="button" class="mi-nav mi-nav--next" id="results-ba-next" aria-label="다음 케이스">›</button>
       </div>
+      <div class="results-ba-info" id="results-ba-info" aria-live="polite">
+        <div class="results-ba-info-name" id="results-ba-member"></div>
+        <div class="results-ba-info-sub" id="results-ba-sub"></div>
+        <div class="results-ba-stats" id="results-ba-stats"></div>
       </div>
-    </details>
-
-    <details class="ba-card ba-card-accordion fade-up" open data-category="rehab">
-      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
-        <div class="ba-card-summary-text">
-          <div class="ba-info-name" data-ba-member>엄00 회원님 · 여성 · 42세</div>
-          <div class="ba-info-sub">4개월 체형교정 & 자세개선</div>
-        </div>
-        <span class="ba-sum-chev">▼</span>
-      </summary>
-      <div class="ba-card-panel">
-      <div class="ba-slider-wrap" id="slider3">
-        <div class="ba-before">
-          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
-          <div class="ba-before-label">BEFORE</div>
-        </div>
-        <div class="ba-after-clip" id="after3" style="clip-path:inset(0 50% 0 0);">
-          <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
-            <div class="ba-after-label">AFTER</div>
-          </div>
-        </div>
-        <div class="ba-divider" id="div3" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
-      </div>
-      <div class="ba-pair-host"></div>
-      <div class="ba-info">
-        <div class="ba-info-name" data-ba-member>엄00 회원님 · 여성 · 42세</div>
-        <div class="ba-info-sub">4개월 체형교정 & 자세개선</div>
-        <div class="ba-info-stats">
-          <div class="ba-info-stat"><div class="ba-info-stat-val">-5cm</div><div class="ba-info-stat-lbl">허리둘레</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">완치</div><div class="ba-info-stat-lbl">허리통증</div></div>
-          <div class="ba-info-stat"><div class="ba-info-stat-val">120일</div><div class="ba-info-stat-lbl">기간</div></div>
-        </div>
-      </div>
-      </div>
-    </details>
-  </div>
-</section>
-
-<!-- 추가 비포앤애프터: 윤OO · 이OO -->
-<section class="before-after before-after-extra" id="results-extra">
-  <div class="fade-up">
-    <div class="section-label">추가 전후</div>
-    <h2 class="section-title">더 많은<br>회원 변화</h2>
-    <p style="color:var(--muted); line-height:1.85; margin-bottom:1rem; font-size:0.84rem; font-weight:300;">동의를 받은 추가 전·후 사진입니다. 슬라이더를 드래그해 비교해 보세요.</p>
-    <p class="ba-accordion-hint fade-up" style="font-size:0.7rem;color:var(--muted2);line-height:1.55;margin:-0.35rem 0 1rem;font-weight:300;">이름 줄을 누르면 사진 영역을 접었다 펼칠 수 있습니다.</p>
-  </div>
-  <div class="ba-cases ba-cases--extra fade-up" id="spotlight-cases">
-    <details class="ba-card ba-card-accordion fade-up" open>
-      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
-        <div class="ba-card-summary-text">
-          <div class="ba-info-name" data-spotlight-member>윤OO 회원님</div>
-          <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
-        </div>
-        <span class="ba-sum-chev">▼</span>
-      </summary>
-      <div class="ba-card-panel">
-      <div class="ba-slider-wrap" id="slider4">
-        <div class="ba-before">
-          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
-          <div class="ba-before-label">BEFORE</div>
-        </div>
-        <div class="ba-after-clip" id="after4" style="clip-path:inset(0 50% 0 0);">
-          <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
-            <div class="ba-after-label">AFTER</div>
-          </div>
-        </div>
-        <div class="ba-divider" id="div4" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
-      </div>
-      <div class="ba-pair-host"></div>
-      <div class="ba-info">
-        <div class="ba-info-name" data-spotlight-member>윤OO 회원님</div>
-        <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
-      </div>
-      </div>
-    </details>
-    <details class="ba-card ba-card-accordion fade-up" open>
-      <summary class="ba-card-summary" aria-label="전·후 사진 펼치기 또는 접기">
-        <div class="ba-card-summary-text">
-          <div class="ba-info-name" data-spotlight-member>이OO 회원님</div>
-          <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
-        </div>
-        <span class="ba-sum-chev">▼</span>
-      </summary>
-      <div class="ba-card-panel">
-      <div class="ba-slider-wrap" id="slider5">
-        <div class="ba-before">
-          <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 전" loading="lazy">
-          <div class="ba-before-label">BEFORE</div>
-        </div>
-        <div class="ba-after-clip" id="after5" style="clip-path:inset(0 50% 0 0);">
-          <div class="ba-after" style="position:absolute;inset:0;">
-            <img class="ba-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="변화 후" loading="lazy">
-            <div class="ba-after-label">AFTER</div>
-          </div>
-        </div>
-        <div class="ba-divider" id="div5" style="left:50%;"><div class="ba-divider-handle">⟺</div></div>
-      </div>
-      <div class="ba-pair-host"></div>
-      <div class="ba-info">
-        <div class="ba-info-name" data-spotlight-member>이OO 회원님</div>
-        <div class="ba-info-sub" data-spotlight-sub>추가 전·후</div>
-      </div>
-      </div>
-    </details>
+    </div>
+    <a class="bp-cta" href="member-results.html">전·후 전체 보기</a>
   </div>
 </section>
 
@@ -1351,6 +1079,27 @@
   <div class="reviews-dots" id="rev-dots"></div>
 </section>
 
+<!-- BODY PROFILE (contents_body — 레이아웃은 위 #results 와 동일) -->
+<section class="body-profile" id="body-profile">
+  <div class="fade-up">
+    <div class="section-label">Studio</div>
+    <h2 class="section-title">바디프로필</h2>
+    <p class="bp-lead fade-up">동의를 받은 회원 사진입니다. 아래 썸네일을 눌러 보실 수 있습니다.</p>
+    <div class="mi-gallery fade-up" data-mi-gallery="contents-body" aria-label="바디프로필 이미지">
+      <div class="mi-main-wrap">
+        <img class="mi-main-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
+        <div class="mi-main-badge" aria-live="polite"></div>
+      </div>
+      <div class="mi-thumb-row-wrap">
+        <button type="button" class="mi-nav mi-nav--prev" aria-label="이전">‹</button>
+        <div class="mi-thumb-scroll" role="tablist" aria-label="사진 선택"></div>
+        <button type="button" class="mi-nav mi-nav--next" aria-label="다음">›</button>
+      </div>
+    </div>
+    <a class="bp-cta" href="body-profile.html">전체 갤러리 보기 (라이트박스)</a>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="fade-up">
@@ -1381,7 +1130,7 @@
         <div class="contact-icon">💬</div>
         <div>
           <div class="contact-item-label">카카오톡</div>
-          <div class="contact-item-val">@Rims1</div>
+          <div class="contact-item-val">@Rim__pt</div>
         </div>
       </div>
       <div class="contact-item">
@@ -1399,13 +1148,12 @@
     <a href="tel:031-233-8622" class="kakao-btn" style="background:var(--card); color:var(--text); border:1px solid var(--border); margin-bottom:0.7rem; display:flex; text-decoration:none;">
       <span class="kakao-icon">📞</span> 전화로 바로 상담하기
     </a>
-    <a href="https://open.kakao.com/o/Rims1" target="_blank" class="kakao-btn">
-      <span class="kakao-icon">💬</span> 카카오톡 상담 @Rims1
+    <a href="https://open.kakao.com/o/sq061rsi" target="_blank" rel="noopener noreferrer" class="kakao-btn">
+      <span class="kakao-icon">💬</span> 카카오톡 상담 @Rim__pt
     </a>
   </div>
 
   <div class="fade-up">
-    <!-- 상담 내용 수신: data-email 에 본인 메일 입력 후 배포. FormSubmit 첫 제출 시 해당 메일에서 활성화 링크를 눌러야 합니다. https://formsubmit.co -->
     <form class="contact-form" id="contact-form" data-email="show3921@naver.com" autocomplete="on">
       <div class="form-field">
         <label>이름</label>
@@ -1476,245 +1224,264 @@ const io = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-// ── assets/contents 비포·애프터 인덱스 (파일명: {코드}비포*.jpg ↔ {코드}애프터*.jpg) ──
-// UI: pairs 없음·1개 → 드래그 슬라이더. pairs 2개 이상 → 고정 분할(좌/우) + .ba-pair-host 에 N차·썸네일 자동 생성(슬라이더 없음).
-var BA_CONTENTS_INDEX = {
-  base: 'assets/contents/',
-  slides: [
-    { code: '주00', category: 'diet',  before: 'assets/contents/주00비포.jpg',  after: 'assets/contents/주00애프터.jpg',  member: '주00 회원님 · 여성 · 28세' },
-    {
-      code: '박00',
-      category: 'bulk',
-      member: '박00 회원님',
-      infoSub: '바디프로필 준비',
-      pairs: [
-        { before: 'assets/contents/박00비포.jpg', after: 'assets/contents/박00애프터.jpg' },
-        { before: 'assets/contents/박00비포2.jpg', after: 'assets/contents/박00애프터2.jpg' },
-      ],
-    },
-    { code: '엄00', category: 'rehab', before: 'assets/contents/엄00 비포.jpg', after: 'assets/contents/엄00애프터.jpg', member: '엄00 회원님 · 여성 · 42세' },
-  ],
-  otherFiles: [
-    '주00인바디 비포1.jpg',
-    '주00인바디 비포2.jpg',
-    '예림바프1.jpg',
-  ],
-};
-/** #results-extra — 윤OO·이OO 등 추가 전후 (pairs 2개 이상이면 메인과 동일 UI)
- *  슬라이더 DOM: 화면 왼쪽 = after 슬롯, 오른쪽 = before 슬롯 → 시간순(좌 비포·우 에프터)이 되도록 파일을 교차 지정함. */
-var BA_SPOTLIGHT_INDEX = {
-  items: [
-    {
-      code: '윤OO',
-      before: 'assets/contents/윤OO 에프터.jpeg',
-      after: 'assets/contents/윤OO 비포.jpeg',
-      member: '윤OO 회원님',
-      infoSub: '추가 전·후',
-    },
-    {
-      code: '이OO',
-      before: 'assets/contents/이OO 에프터.jpeg',
-      after: 'assets/contents/이OO 비포.jpeg',
-      member: '이OO 회원님',
-      infoSub: '추가 전·후',
-    },
-  ],
-};
-/** assets/contents — 파일명에 「후기」 포함, 표시 순서 1→4 */
 var REVIEW_PHOTOS_INDEX = [
   'assets/contents/예림 pt후기 1.jpg',
   'assets/contents/예림 pt후기2.jpg',
   'assets/contents/ㅇㅖ림 pt후기 3.jpg',
   'assets/contents/예림pt후기4.jpg',
 ];
+var BA_INDEX_SLIDES = [
+  {
+    before: 'assets/contents/WhatsApp Image 2026-04-28 at 11.54.19 AM.jpeg',
+    after: 'assets/contents/WhatsApp Image 2026-04-28 at 11.54.20 AM.jpeg',
+    member: '김00 회원님',
+    infoSub: '체중 감량 프로그램',
+    stats: [
+      { val: '-10kg', lbl: '체중' },
+      { val: '90일', lbl: '기간' },
+    ],
+  },
+  {
+    before: 'assets/contents/WhatsApp Image 2026-04-28 at 11.53.47 AM.jpeg',
+    after: 'assets/contents/WhatsApp Image 2026-04-28 at 11.53.48 AM.jpeg',
+    member: '엄00 회원님',
+    infoSub: '체중 감량 프로그램',
+    stats: [
+      { val: '-15kg', lbl: '체중' },
+      { val: '180일', lbl: '기간' },
+    ],
+  },
+  {
+    before: 'assets/contents/주00애프터.jpg',
+    after: 'assets/contents/주00비포.jpg',
+    member: '주00 회원님 · 여성 · 28세',
+    infoSub: '3개월 체지방 감량 프로그램',
+    stats: [
+      { val: '-12kg', lbl: '체중' },
+      { val: '-9kg', lbl: '체지방량' },
+      { val: '90일', lbl: '기간' },
+    ],
+  },
+];
+var BODY_PROFILE_INDEX = [
+  'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.03 AM.jpeg',
+  'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.03 AM (1).jpeg',
+  'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.04 AM.jpeg',
+  'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.04 AM (1).jpeg',
+  'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.05 AM.jpeg',
+];
 function baEncPath(relPath) {
   if (!relPath) return '';
   return relPath.split('/').map(function (seg) { return encodeURIComponent(seg); }).join('/');
 }
-function applyBaContentsIndex() {
-  var root = document.getElementById('main-ba-cases');
-  if (!root || !BA_CONTENTS_INDEX.slides) return;
-  var cards = root.querySelectorAll('.ba-card');
-  BA_CONTENTS_INDEX.slides.forEach(function (row, i) {
-    var card = cards[i];
-    if (!card) return;
-    var pair0 = null;
-    if (row.pairs && row.pairs.length) {
-      pair0 = row.pairs[0];
-    } else if (row.before && row.after) {
-      pair0 = { before: row.before, after: row.after };
+function initMiGallery(root, relPaths, opts) {
+  opts = opts || {};
+  var mainAlt = opts.mainAlt || '갤러리 이미지';
+  var badgeLabel = opts.badgeLabel || '';
+  var main = root.querySelector('.mi-main-img');
+  var badge = root.querySelector('.mi-main-badge');
+  var strip = root.querySelector('.mi-thumb-scroll');
+  var prev = root.querySelector('.mi-nav--prev');
+  var next = root.querySelector('.mi-nav--next');
+  if (!main || !strip || !relPaths || !relPaths.length) return;
+  var urls = relPaths.map(function (p) { return baEncPath(p); });
+  var n = urls.length;
+  var cur = 0;
+  var thumbBtns = [];
+
+  function scrollThumbIntoView(idx) {
+    var b = thumbBtns[idx];
+    if (b && typeof b.scrollIntoView === 'function') {
+      b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
-    if (!pair0) return;
-    var beforeImg = card.querySelector('.ba-before .ba-img');
-    var afterImg = card.querySelector('.ba-after .ba-img');
-    if (beforeImg) {
-      beforeImg.src = baEncPath(pair0.before);
-      beforeImg.alt = (row.code || '') + ' 회원 변화 전';
-    }
-    if (afterImg) {
-      afterImg.src = baEncPath(pair0.after);
-      afterImg.alt = (row.code || '') + ' 회원 변화 후';
-    }
-    if (row.category) card.dataset.category = row.category;
-    if (row.member) {
-      card.querySelectorAll('[data-ba-member]').forEach(function (el) { el.textContent = row.member; });
-    }
-    if (row.infoSub) {
-      card.querySelectorAll('.ba-info-sub').forEach(function (el) { el.textContent = row.infoSub; });
-    }
+  }
+
+  function setIdx(i) {
+    cur = ((i % n) + n) % n;
+    main.src = urls[cur];
+    main.alt = mainAlt + ' ' + (cur + 1);
+    if (badge) badge.textContent = (badgeLabel ? badgeLabel + ' ' : '') + (cur + 1) + ' / ' + n;
+    thumbBtns.forEach(function (btn, j) {
+      var on = j === cur;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    scrollThumbIntoView(cur);
+  }
+
+  strip.innerHTML = '';
+  relPaths.forEach(function (relPath, i) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'mi-thumb' + (i === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-label', '사진 ' + (i + 1));
+    btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
+    var im = document.createElement('img');
+    im.src = urls[i];
+    im.alt = '';
+    im.loading = i < 8 ? 'eager' : 'lazy';
+    im.decoding = 'async';
+    btn.appendChild(im);
+    btn.addEventListener('click', function () { setIdx(i); });
+    strip.appendChild(btn);
+    thumbBtns.push(btn);
+  });
+
+  if (prev) prev.addEventListener('click', function () { setIdx(cur - 1); });
+  if (next) next.addEventListener('click', function () { setIdx(cur + 1); });
+
+  setIdx(0);
+}
+document.querySelectorAll('[data-mi-gallery]').forEach(function (root) {
+  var key = root.getAttribute('data-mi-gallery');
+  if (key === 'contents-body') {
+    initMiGallery(root, BODY_PROFILE_INDEX, { mainAlt: '바디프로필', badgeLabel: '' });
+  }
+});
+
+function renderResultsBaStats(container, stats) {
+  if (!container) return;
+  container.innerHTML = '';
+  if (!stats || !stats.length) return;
+  stats.forEach(function (s) {
+    var w = document.createElement('div');
+    w.className = 'results-ba-stat';
+    var v = document.createElement('div');
+    v.className = 'results-ba-stat-val';
+    v.textContent = s.val;
+    var l = document.createElement('div');
+    l.className = 'results-ba-stat-lbl';
+    l.textContent = s.lbl;
+    w.appendChild(v);
+    w.appendChild(l);
+    container.appendChild(w);
   });
 }
-applyBaContentsIndex();
 
-function applyBaSpotlightIndex() {
-  var root = document.getElementById('spotlight-cases');
-  if (!root || !BA_SPOTLIGHT_INDEX || !BA_SPOTLIGHT_INDEX.items) return;
-  var cards = root.querySelectorAll('.ba-card');
-  BA_SPOTLIGHT_INDEX.items.forEach(function (row, i) {
-    var card = cards[i];
-    if (!card) return;
-    var pair0 = null;
-    if (row.pairs && row.pairs.length) pair0 = row.pairs[0];
-    else if (row.before && row.after) pair0 = { before: row.before, after: row.after };
-    if (!pair0) return;
-    var beforeImg = card.querySelector('.ba-before .ba-img');
-    var afterImg = card.querySelector('.ba-after .ba-img');
-    if (beforeImg) {
-      beforeImg.src = baEncPath(pair0.before);
-      beforeImg.alt = (row.code || '') + ' 회원 변화 전';
-    }
-    if (afterImg) {
-      afterImg.src = baEncPath(pair0.after);
-      afterImg.alt = (row.code || '') + ' 회원 변화 후';
-    }
-    if (row.member) {
-      card.querySelectorAll('[data-spotlight-member]').forEach(function (el) { el.textContent = row.member; });
-    }
-    if (row.infoSub) {
-      card.querySelectorAll('[data-spotlight-sub]').forEach(function (el) { el.textContent = row.infoSub; });
-    }
+function initBaSliderForWrap(wrap) {
+  var clip = wrap.querySelector('.ba-after-clip');
+  var div = wrap.querySelector('.ba-divider');
+  var handle = div ? div.querySelector('.ba-divider-handle') : null;
+  if (!wrap || !clip || !div || !handle) return;
+  var drag = false;
+  function set(clientX) {
+    var r = wrap.getBoundingClientRect();
+    var p = Math.min(Math.max((clientX - r.left) / r.width * 100, 3), 97);
+    div.style.left = p + '%';
+    clip.style.clipPath = 'inset(0 ' + (100 - p) + '% 0 0)';
+  }
+  function startFromHandle(e) {
+    drag = true;
+    e.preventDefault();
+  }
+  handle.addEventListener('mousedown', startFromHandle);
+  handle.addEventListener('touchstart', startFromHandle, { passive: false });
+  wrap.addEventListener('mousedown', function (e) {
+    if (handle.contains(e.target)) return;
+    if (!e.target.closest('.ba-before') && !e.target.closest('.ba-after-clip')) return;
+    drag = true;
+    set(e.clientX);
+    e.preventDefault();
   });
+  wrap.addEventListener('touchstart', function (e) {
+    if (handle.contains(e.target)) return;
+    var t = e.target;
+    if (!t.closest || (!t.closest('.ba-before') && !t.closest('.ba-after-clip'))) return;
+    drag = true;
+    if (e.touches && e.touches[0]) set(e.touches[0].clientX);
+    e.preventDefault();
+  }, { passive: false });
+  window.addEventListener('mousemove', function (e) { if (drag) set(e.clientX); });
+  window.addEventListener('touchmove', function (e) {
+    if (drag && e.touches && e.touches[0]) { set(e.touches[0].clientX); e.preventDefault(); }
+  }, { passive: false });
+  window.addEventListener('mouseup', function () { drag = false; });
+  window.addEventListener('touchend', function () { drag = false; });
 }
-applyBaSpotlightIndex();
 
-/** pairs.length ≤ 1 → 슬라이더만. pairs.length > 1 → N차 버튼 + 비포·애프터 썸네일 그리드(2×N) */
-function initBaMultiPairForRoot(root, slides) {
-  if (!root || !slides || !slides.length) return;
-  var cards = root.querySelectorAll('.ba-card');
+function initResultsBaTeaser() {
+  var slides = BA_INDEX_SLIDES;
+  var wrap = document.getElementById('index-ba-slider-wrap');
+  var beforeImg = document.getElementById('index-ba-before-img');
+  var afterImg = document.getElementById('index-ba-after-img');
+  var clip = document.getElementById('index-ba-after-clip');
+  var div = document.getElementById('index-ba-divider');
+  var strip = document.getElementById('results-ba-thumbs');
+  var badge = document.getElementById('index-ba-case-badge');
+  var memberEl = document.getElementById('results-ba-member');
+  var subEl = document.getElementById('results-ba-sub');
+  var statsEl = document.getElementById('results-ba-stats');
+  var prev = document.getElementById('results-ba-prev');
+  var next = document.getElementById('results-ba-next');
+  if (!wrap || !beforeImg || !afterImg || !clip || !div || !strip || !slides.length) return;
+  var n = slides.length;
+  var cur = 0;
+  var thumbBtns = [];
+
+  function scrollThumbIntoView(idx) {
+    var b = thumbBtns[idx];
+    if (b && typeof b.scrollIntoView === 'function') {
+      b.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }
+
+  function resetSlider() {
+    div.style.left = '50%';
+    clip.style.clipPath = 'inset(0 50% 0 0)';
+  }
+
+  function setIdx(i) {
+    cur = ((i % n) + n) % n;
+    var row = slides[cur];
+    beforeImg.src = baEncPath(row.before);
+    afterImg.src = baEncPath(row.after);
+    var m = row.member || '';
+    beforeImg.alt = m ? m + ' 변화 전' : '변화 전';
+    afterImg.alt = m ? m + ' 변화 후' : '변화 후';
+    if (badge) badge.textContent = (m || '케이스 ' + (cur + 1)) + ' · ' + (cur + 1) + ' / ' + n;
+    if (memberEl) memberEl.textContent = m;
+    if (subEl) subEl.textContent = row.infoSub || '';
+    renderResultsBaStats(statsEl, row.stats);
+    resetSlider();
+    thumbBtns.forEach(function (btn, j) {
+      var on = j === cur;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    scrollThumbIntoView(cur);
+  }
+
+  strip.innerHTML = '';
   slides.forEach(function (row, i) {
-    var card = cards[i];
-    var host = card ? card.querySelector('.ba-pair-host') : null;
-    if (!card || !host) return;
-    host.innerHTML = '';
-    card.classList.toggle('ba-card--multi', !!(row.pairs && row.pairs.length > 1));
-    if (!row.pairs || row.pairs.length <= 1) return;
-
-    var nPair = row.pairs.length;
-    var beforeImg = card.querySelector('.ba-before .ba-img');
-    var afterImg = card.querySelector('.ba-after .ba-img');
-    if (!beforeImg || !afterImg) return;
-
-    var strip = document.createElement('div');
-    strip.className = 'ba-pair-strip';
-    strip.setAttribute('aria-label', (row.code || '회원') + ' 전후 사진 세트');
-
-    var toggle = document.createElement('div');
-    toggle.className = 'ba-pair-toggle';
-    toggle.setAttribute('role', 'group');
-    for (var j = 0; j < nPair; j++) {
-      var pbtn = document.createElement('button');
-      pbtn.type = 'button';
-      pbtn.className = 'ba-pair-btn' + (j === 0 ? ' active' : '');
-      pbtn.setAttribute('data-ba-pair', String(j));
-      pbtn.textContent = (j + 1) + '차 전후';
-      toggle.appendChild(pbtn);
-    }
-
-    var grid = document.createElement('div');
-    grid.className = 'ba-mini-grid';
-    if (nPair * 2 > 4) grid.classList.add('ba-mini-grid--many');
-    grid.setAttribute('role', 'list');
-
-    function beforeLbl(j) { return j === 0 ? '비포' : '비포' + (j + 1); }
-    function afterLbl(j) { return j === 0 ? '애프터' : '애프터' + (j + 1); }
-
-    for (var b = 0; b < nPair; b++) {
-      var tb = document.createElement('button');
-      tb.type = 'button';
-      tb.className = 'ba-mini-tile' + (b === 0 ? ' active' : '');
-      tb.setAttribute('data-ba-pair', String(b));
-      tb.setAttribute('aria-label', beforeLbl(b));
-      var spb = document.createElement('span');
-      spb.className = 'ba-mini-lbl';
-      spb.textContent = beforeLbl(b);
-      var imb = document.createElement('img');
-      imb.className = 'ba-mini-img';
-      imb.alt = '';
-      imb.width = 120;
-      imb.height = 120;
-      imb.loading = 'lazy';
-      imb.src = baEncPath(row.pairs[b].before);
-      tb.appendChild(spb);
-      tb.appendChild(imb);
-      grid.appendChild(tb);
-    }
-    for (var a = 0; a < nPair; a++) {
-      var ta = document.createElement('button');
-      ta.type = 'button';
-      ta.className = 'ba-mini-tile' + (a === 0 ? ' active' : '');
-      ta.setAttribute('data-ba-pair', String(a));
-      ta.setAttribute('aria-label', afterLbl(a));
-      var spa = document.createElement('span');
-      spa.className = 'ba-mini-lbl';
-      spa.textContent = afterLbl(a);
-      var ima = document.createElement('img');
-      ima.className = 'ba-mini-img';
-      ima.alt = '';
-      ima.width = 120;
-      ima.height = 120;
-      ima.loading = 'lazy';
-      ima.src = baEncPath(row.pairs[a].after);
-      ta.appendChild(spa);
-      ta.appendChild(ima);
-      grid.appendChild(ta);
-    }
-
-    strip.appendChild(toggle);
-    strip.appendChild(grid);
-    host.appendChild(strip);
-
-    var cur = 0;
-    function setPair(raw) {
-      var idx = parseInt(raw, 10);
-      if (isNaN(idx)) idx = 0;
-      cur = Math.max(0, Math.min(idx, nPair - 1));
-      var p = row.pairs[cur];
-      beforeImg.src = baEncPath(p.before);
-      afterImg.src = baEncPath(p.after);
-      strip.querySelectorAll('.ba-pair-btn').forEach(function (btn, jj) {
-        btn.classList.toggle('active', jj === cur);
-      });
-      strip.querySelectorAll('.ba-mini-tile').forEach(function (t) {
-        var pi = parseInt(t.getAttribute('data-ba-pair'), 10);
-        t.classList.toggle('active', pi === cur);
-      });
-    }
-
-    strip.querySelectorAll('.ba-pair-btn').forEach(function (btn, jj) {
-      btn.addEventListener('click', function () { setPair(jj); });
-    });
-    strip.querySelectorAll('.ba-mini-tile').forEach(function (t) {
-      t.addEventListener('click', function () {
-        setPair(parseInt(t.getAttribute('data-ba-pair'), 10));
-      });
-    });
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'mi-thumb' + (i === 0 ? ' active' : '');
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-label', (slides[i].member || '케이스 ' + (i + 1)) + ' 전·후');
+    btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
+    var im = document.createElement('img');
+    im.src = baEncPath(row.before);
+    im.alt = '';
+    im.loading = i < 8 ? 'eager' : 'lazy';
+    im.decoding = 'async';
+    btn.appendChild(im);
+    btn.addEventListener('click', function () { setIdx(i); });
+    strip.appendChild(btn);
+    thumbBtns.push(btn);
   });
+
+  if (prev) prev.addEventListener('click', function () { setIdx(cur - 1); });
+  if (next) next.addEventListener('click', function () { setIdx(cur + 1); });
+
+  setIdx(0);
+  initBaSliderForWrap(wrap);
 }
-function initBaMultiPairCards() {
-  initBaMultiPairForRoot(document.getElementById('main-ba-cases'), BA_CONTENTS_INDEX.slides);
-  initBaMultiPairForRoot(document.getElementById('spotlight-cases'), BA_SPOTLIGHT_INDEX.items);
-}
-initBaMultiPairCards();
+initResultsBaTeaser();
 
 function initReviewPhotoGallery() {
   var viewer = document.getElementById('review-photo-viewer');
@@ -1761,51 +1528,6 @@ function initReviewPhotoGallery() {
 }
 initReviewPhotoGallery();
 
-// ── BEFORE/AFTER SLIDERS ──
-function initSlider(wId, aId, dId) {
-  const wrap = document.getElementById(wId);
-  if (wrap && wrap.closest('.ba-card--multi')) return;
-  const clip = document.getElementById(aId);
-  const div  = document.getElementById(dId);
-  const handle = div ? div.querySelector('.ba-divider-handle') : null;
-  if (!wrap || !clip || !div || !handle) return;
-  let drag = false;
-  const set = x => {
-    const r = wrap.getBoundingClientRect();
-    const p = Math.min(Math.max((x-r.left)/r.width*100, 3), 97);
-    div.style.left = p+'%';
-    clip.style.clipPath = `inset(0 ${100-p}% 0 0)`;
-  };
-  handle.addEventListener('mousedown', e => { drag=true; e.preventDefault(); });
-  handle.addEventListener('touchstart', e => { drag=true; e.preventDefault(); }, {passive:false});
-  window.addEventListener('mousemove', e => { if(drag) set(e.clientX); });
-  window.addEventListener('touchmove', e => {
-    if(drag) {
-      set(e.touches[0].clientX);
-      e.preventDefault();
-    }
-  }, {passive:false});
-  window.addEventListener('mouseup', () => drag=false);
-  window.addEventListener('touchend', () => drag=false);
-}
-initSlider('slider1','after1','div1');
-initSlider('slider2','after2','div2');
-initSlider('slider3','after3','div3');
-initSlider('slider4','after4','div4');
-initSlider('slider5','after5','div5');
-
-// ── BA TABS (메인 #results 카드만 필터; 추가 전후 섹션은 제외) ──
-document.querySelectorAll('.ba-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.ba-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const f = tab.dataset.filter;
-    document.querySelectorAll('#results .ba-card').forEach(c => {
-      c.style.display = (f==='all'||c.dataset.category===f) ? 'block' : 'none';
-    });
-  });
-});
-
 // ── REVIEWS SLIDER (텍스트 후기) ──
 const track = document.getElementById('rev-track');
 const dotsEl = document.getElementById('rev-dots');
@@ -1845,13 +1567,13 @@ if (revPrev) revPrev.onclick = () => go(idx-1);
 if (revNext) revNext.onclick = () => go(idx+1);
 buildDots();
 
-// ── FORM SUBMIT (FormSubmit → data-email 로 수신) ──
+// ── FORM SUBMIT (FormSubmit) ──
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const formEl = e.target;
   const to = (formEl.dataset.email || '').trim();
   if (!to || !to.includes('@')) {
-    alert('index.html 상담 폼의 data-email 속성에 수신할 이메일 주소를 넣어주세요.');
+    alert('상담 신청 접수 설정에 문제가 있어 전송할 수 없습니다. 전화 또는 카카오톡으로 문의해 주세요.');
     return;
   }
   const n = document.getElementById('f-name').value.trim();

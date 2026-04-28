@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바디프로필 스튜디오 | 이예림 PT</title>
+<meta name="description" content="회원 동의를 받은 바디프로필 스튜디오 촬영 이미지 갤러리입니다.">
+<link rel="canonical" href="https://rim-pt.com/body-profile.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="바디프로필 스튜디오 | 이예림 PT">
+<meta property="og:description" content="스튜디오 바디프로필 촬영 이미지 모음">
+<meta property="og:url" content="https://rim-pt.com/body-profile.html">
+<meta property="og:image" content="https://rim-pt.com/assets/%ED%8A%B8%EB%A0%88%EC%9D%B4%EB%84%88/trainer-1.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#080808; --card:#131313; --line:#2b2b2b;
+    --text:#ececec; --muted:#9a9a9a; --accent:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Noto Sans KR',system-ui,sans-serif;
+    background:var(--bg); color:var(--text);
+    max-width:480px; margin:0 auto; padding-bottom:2.5rem;
+  }
+  .top{
+    position:sticky; top:0; z-index:20;
+    background:rgba(8,8,8,.96); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    padding:0.9rem 1rem; display:flex; justify-content:space-between; align-items:center;
+  }
+  .top a{color:var(--muted);text-decoration:none;font-size:.78rem}
+  .top .cta{background:var(--accent);color:#101010;padding:.5rem .8rem;font-weight:700}
+  section{padding:1.6rem 1rem 2rem}
+  .label{font-size:.62rem;letter-spacing:.15em;color:var(--muted);margin-bottom:.55rem}
+  h1{font-size:1.65rem;line-height:1.15;font-weight:500;margin-bottom:.75rem}
+  .lead{color:var(--muted);line-height:1.75;font-size:.86rem;margin-bottom:1.35rem}
+  .bp-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:0.5rem;
+  }
+  .bp-item{
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    background:var(--card);
+    cursor:pointer;
+    padding:0;
+    display:block;
+    width:100%;
+    aspect-ratio:3/4;
+    position:relative;
+  }
+  .bp-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .bp-item img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .bp-item::after{
+    content:'';
+    position:absolute;inset:0;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
+    pointer-events:none;
+  }
+  .bp-lightbox{
+    position:fixed;inset:0;z-index:100;
+    display:none; flex-direction:column;
+    align-items:center; justify-content:center;
+    padding:1rem;
+  }
+  .bp-lightbox.is-open{display:flex}
+  .bp-lb-backdrop{
+    position:absolute;inset:0;
+    background:rgba(0,0,0,.92);
+    cursor:pointer;
+  }
+  .bp-lb-stage{
+    position:relative;z-index:1;
+    width:100%;max-width:480px;
+    flex:1;min-height:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    pointer-events:none;
+  }
+  .bp-lb-inner{
+    pointer-events:auto;
+    display:flex;align-items:center;justify-content:center;
+    width:100%;flex:1;min-height:0;
+  }
+  .bp-lb-inner img{
+    max-width:100%;max-height:min(78vh, 640px);
+    object-fit:contain;
+    border-radius:6px;
+  }
+  .bp-lb-bar{
+    pointer-events:auto;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:.6rem;width:100%;max-width:480px;
+    margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--line);
+  }
+  .bp-lb-close{
+    border:1px solid var(--line);background:#1a1a1a;color:var(--text);
+    padding:.55rem 1rem;font-size:.78rem;cursor:pointer;font-weight:700;
+  }
+  .bp-lb-nav{
+    display:flex;gap:.45rem;align-items:center;
+  }
+  .bp-lb-btn{
+    width:42px;height:42px;border:1px solid var(--line);
+    background:#171717;color:var(--text);font-size:1.1rem;cursor:pointer;
+  }
+  .bp-lb-badge{font-size:.72rem;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="top">
+    <a href="index.html#body-profile">← 메인으로</a>
+    <a class="cta" href="index.html#contact">무료 상담</a>
+  </div>
+
+  <section>
+    <div class="label">BODY PROFILE STUDIO</div>
+    <h1>바디프로필<br>스튜디오</h1>
+    <p class="lead">회원 동의를 받은 스튜디오 촬영 이미지입니다. 썸네일을 누르면 크게 볼 수 있으며, 좌우 버튼으로 다른 사진을 넘겨 보실 수 있습니다.</p>
+    <div class="bp-grid" id="bp-grid" aria-label="바디프로필 갤러리"></div>
+  </section>
+
+  <div class="bp-lightbox" id="bp-lightbox" role="dialog" aria-modal="true" aria-label="이미지 확대 보기" hidden>
+    <div class="bp-lb-backdrop" id="bp-lb-backdrop" aria-hidden="true"></div>
+    <div class="bp-lb-stage">
+    <div class="bp-lb-inner">
+      <img id="bp-lb-img" src="" alt="">
+    </div>
+    <div class="bp-lb-bar">
+      <button type="button" class="bp-lb-close" id="bp-lb-close">닫기</button>
+      <span class="bp-lb-badge" id="bp-lb-badge"></span>
+      <div class="bp-lb-nav">
+        <button type="button" class="bp-lb-btn" id="bp-lb-prev" aria-label="이전">‹</button>
+        <button type="button" class="bp-lb-btn" id="bp-lb-next" aria-label="다음">›</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var BODY_PROFILE_INDEX = [
+    'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.03 AM.jpeg',
+    'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.03 AM (1).jpeg',
+    'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.04 AM.jpeg',
+    'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.04 AM (1).jpeg',
+    'assets/contents_body/WhatsApp Image 2026-04-28 at 11.42.05 AM.jpeg',
+  ];
+  function baEncPath(relPath) {
+    if (!relPath) return '';
+    return relPath.split('/').map(function (seg) { return encodeURIComponent(seg); }).join('/');
+  }
+  var urls = BODY_PROFILE_INDEX.map(function (p) { return baEncPath(p); });
+  var grid = document.getElementById('bp-grid');
+  var lb = document.getElementById('bp-lightbox');
+  var lbImg = document.getElementById('bp-lb-img');
+  var lbBadge = document.getElementById('bp-lb-badge');
+  var lbClose = document.getElementById('bp-lb-close');
+  var lbPrev = document.getElementById('bp-lb-prev');
+  var lbNext = document.getElementById('bp-lb-next');
+  var lbBackdrop = document.getElementById('bp-lb-backdrop');
+  var n = urls.length;
+  var cur = 0;
+
+  if (grid && n) {
+    BODY_PROFILE_INDEX.forEach(function (relPath, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bp-item';
+      btn.id = 'bp-' + i;
+      btn.setAttribute('aria-label', '바디프로필 ' + (i + 1) + ' 크게 보기');
+      var im = document.createElement('img');
+      im.src = urls[i];
+      im.alt = '';
+      im.loading = i < 2 ? 'eager' : 'lazy';
+      im.decoding = 'async';
+      btn.appendChild(im);
+      btn.addEventListener('click', function () { openAt(i); });
+      grid.appendChild(btn);
+    });
+  }
+
+  function setLbIdx(i) {
+    cur = ((i % n) + n) % n;
+    lbImg.src = urls[cur];
+    lbImg.alt = '바디프로필 ' + (cur + 1);
+    lbBadge.textContent = (cur + 1) + ' / ' + n;
+  }
+
+  function openAt(i) {
+    if (!lb || !n) return;
+    lb.hidden = false;
+    lb.classList.add('is-open');
+    setLbIdx(i);
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function closeLb() {
+    if (!lb) return;
+    lb.classList.remove('is-open');
+    lb.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  if (lbPrev) lbPrev.addEventListener('click', function () { setLbIdx(cur - 1); });
+  if (lbNext) lbNext.addEventListener('click', function () { setLbIdx(cur + 1); });
+  if (lbClose) lbClose.addEventListener('click', closeLb);
+  if (lbBackdrop) lbBackdrop.addEventListener('click', closeLb);
+
+  document.addEventListener('keydown', function (e) {
+    if (!lb || !lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeLb(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); setLbIdx(cur - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); setLbIdx(cur + 1); }
+  });
+
+  function hashToIndex() {
+    var h = (location.hash || '').replace(/^#/, '');
+    var m = /^bp-(\d+)$/.exec(h);
+    if (!m) return -1;
+    var idx = parseInt(m[1], 10);
+    if (idx < 0 || idx >= n) return -1;
+    return idx;
+  }
+
+  function applyHash() {
+    var idx = hashToIndex();
+    if (idx < 0) return;
+    var el = document.getElementById('bp-' + idx);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    openAt(idx);
+  }
+
+  window.addEventListener('hashchange', applyHash);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyHash);
+  } else {
+    applyHash();
+  }
+})();
+</script>
+</body>
+</html>
