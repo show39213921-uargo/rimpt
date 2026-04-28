@@ -166,7 +166,7 @@
   }
   .hero-content {
     position:relative; z-index:2;
-    padding: 0 1.4rem 0;
+    padding: 0 1.4rem 2.5rem;
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
@@ -203,28 +203,6 @@
     display:block; width:100%;
   }
 
-  /* HERO STATS BAR */
-  .hero-stats-bar {
-    position:relative; z-index:2;
-    display:grid; grid-template-columns: repeat(3, 1fr);
-    background:rgba(4,4,4,0.9);
-    border-top:1px solid var(--border); margin-top:2rem;
-    backdrop-filter: blur(8px);
-  }
-  .hero-stat {
-    padding:1.1rem 0.5rem; text-align:center;
-    border-right:1px solid var(--border);
-  }
-  .hero-stat:last-child { border-right:none; }
-  .hero-stat-num {
-    font-family:'Cormorant Garamond', serif;
-    font-size:2.2rem; font-weight:300; color:var(--accent); line-height:1;
-  }
-  .hero-stat-label {
-    font-size:0.6rem; color:var(--muted);
-    text-transform:uppercase; letter-spacing:0.1em; margin-top:3px;
-  }
-
   /* ── SECTION COMMON ── */
   section { padding:4rem 1.4rem; }
   .section-label {
@@ -240,29 +218,6 @@
     font-size: clamp(2.4rem, 10vw, 3.8rem);
     line-height:1.05; font-weight:300; margin-bottom:1.2rem;
     color:var(--accent);
-  }
-
-  /* ── STATS BAND ── */
-  .stats-band {
-    background:var(--mid); padding:0;
-    border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-  }
-  .stats-inner { display:grid; grid-template-columns:repeat(2,1fr); }
-  .stat-block {
-    padding:2.5rem 1rem; text-align:center;
-    border-right:1px solid var(--border);
-    border-bottom:1px solid var(--border);
-  }
-  .stat-block:nth-child(2n) { border-right:none; }
-  .stat-block:nth-last-child(-n+2) { border-bottom:none; }
-  .stat-big {
-    font-family:'Cormorant Garamond', serif;
-    font-size:clamp(3rem,12vw,4.5rem);
-    font-weight:300; color:var(--accent); line-height:1;
-  }
-  .stat-desc {
-    font-size:0.63rem; color:var(--muted);
-    text-transform:uppercase; letter-spacing:0.12em; margin-top:0.5rem;
   }
 
   /* ── ABOUT ── */
@@ -807,43 +762,7 @@
       <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담 신청</button>
     </div>
   </div>
-  <div class="hero-stats-bar">
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="500">0</div>
-      <div class="hero-stat-label">누적 회원</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="9">0</div>
-      <div class="hero-stat-label">경력(년)</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="98">0</div>
-      <div class="hero-stat-label">만족도(%)</div>
-    </div>
-  </div>
 </section>
-
-<!-- STATS BAND -->
-<div class="stats-band">
-  <div class="stats-inner">
-    <div class="stat-block">
-      <div class="stat-big" data-count="12">0</div>
-      <div class="stat-desc">평균 감량(kg)</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-big" data-count="90">0</div>
-      <div class="stat-desc">기간(일)</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-big" data-count="5">0</div>
-      <div class="stat-desc">대회 수상</div>
-    </div>
-    <div class="stat-block">
-      <div class="stat-big" data-count="4">0</div>
-      <div class="stat-desc">보유 자격증</div>
-    </div>
-  </div>
-</div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
@@ -1278,40 +1197,16 @@
 </div>
 
 <script>
-// ── COUNTER ANIMATION ──
-function animateCounter(el, target, duration=1800) {
-  let start = null;
-  const step = ts => {
-    if(!start) start = ts;
-    const p = Math.min((ts-start)/duration, 1);
-    const ease = p<0.5 ? 2*p*p : -1+(4-2*p)*p;
-    el.textContent = Math.round(ease*target);
-    if(p<1) requestAnimationFrame(step);
-    else el.textContent = target;
-  };
-  requestAnimationFrame(step);
-}
-
 // ── INTERSECTION OBSERVER ──
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(e.isIntersecting) {
       e.target.classList.add('visible');
-      if(e.target.dataset.count && !e.target.dataset.done) {
-        e.target.dataset.done = true;
-        animateCounter(e.target, +e.target.dataset.count);
-      }
     }
   });
 }, { threshold:0.12 });
 
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
-
-// Hero counters on load
-setTimeout(() => {
-  document.querySelectorAll('.hero-stat-num[data-count]').forEach(el => animateCounter(el, +el.dataset.count, 1500));
-}, 400);
 
 // ── assets/contents 비포·애프터 인덱스 (파일명: {코드}비포*.jpg ↔ {코드}애프터*.jpg) ──
 var BA_CONTENTS_INDEX = {
