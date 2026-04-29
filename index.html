@@ -1560,6 +1560,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         _subject: '[rimpt] 무료 상담 신청',
+        _template: 'table',
         이름: n,
         연락처: p,
         관심프로그램: prog,
