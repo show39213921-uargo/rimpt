@@ -412,13 +412,6 @@
   /* ── PROGRAMS ── */
   .programs { background:var(--mid); }
   .prog-grid { display:flex; flex-direction:column; gap:1px; margin-top:2.5rem; background:var(--border); }
-  .programs-top-actions { margin-top:0.3rem; }
-  .programs-link-btn {
-    width:100%; padding:0.88rem 1rem; border:1px solid var(--border-light);
-    background:transparent; color:var(--text); cursor:pointer;
-    font-size:0.73rem; font-weight:600; letter-spacing:0.08em;
-    text-transform:uppercase; font-family:'Noto Sans KR', sans-serif;
-  }
   .prog-card {
     background:var(--card); padding:2rem 1.4rem;
     position:relative; overflow:hidden;
@@ -780,9 +773,6 @@ window.scrollTo(0, 0);
 <nav id="navbar">
   <button type="button" class="nav-logo-btn" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" aria-label="맨 위로">Lee Ye Rim</button>
   <div class="nav-actions">
-    <!-- 오픈 전: 원격 코칭 상세 페이지 비활성
-    <button type="button" class="nav-link-btn" onclick="location.href='remote-coaching.html'">원격 코칭</button>
-    -->
     <button type="button" class="nav-link-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">소개·이력</button>
     <button type="button" class="nav-link-btn" onclick="document.getElementById('body-profile').scrollIntoView({behavior:'smooth'})">바디프로필</button>
     <button type="button" class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">무료 상담</button>
@@ -930,11 +920,6 @@ window.scrollTo(0, 0);
     <div class="section-label">PT 가격 안내</div>
     <h2 class="section-title">프로그램<br>선택하기</h2>
     <p style="color:var(--muted);font-size:0.82rem;line-height:1.75;font-weight:300;margin-bottom:1.5rem;">가격은 참고용이며, 첫 상담에서 체력·목표에 맞는 회차와 시간을 함께 조정할 수 있습니다.</p>
-    <!-- 오픈 전: 원격 코칭 상세 페이지 비활성
-    <div class="programs-top-actions">
-      <button class="programs-link-btn" onclick="location.href='remote-coaching.html'">원격 식단·자세 코칭 서비스 자세히 보기</button>
-    </div>
-    -->
   </div>
   <div class="prog-grid">
 
@@ -982,23 +967,6 @@ window.scrollTo(0, 0);
       </div>
       <button class="prog-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">상담 신청하기</button>
     </div>
-
-    <!-- 원격 코칭 프로그램 카드 (상담 박스) — 비활성 시 주석 유지
-    <div class="prog-card fade-up">
-      <div class="prog-num">04</div>
-      <div class="prog-badge">신규</div>
-      <div class="prog-title">원격 코칭</div>
-      <div class="prog-price">ONLINE</div>
-      <div class="prog-period">식단 · 인바디 · 자세교정 · 일일 피드백</div>
-      <p class="prog-desc">센터 방문이 어려운 분들을 위한 비대면 관리형 서비스입니다. 회원님의 데이터와 운동 영상을 기준으로 매일 코칭합니다.</p>
-      <div class="prog-items">
-        <div class="prog-item">주 1회 인바디 기반 운동 루틴 업데이트</div>
-        <div class="prog-item">운동 영상 자세 교정 피드백</div>
-        <div class="prog-item">1일 1회 카카오톡 체크 리포트</div>
-      </div>
-      <button class="prog-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">상담 신청하기</button>
-    </div>
-    -->
 
   </div>
 </section>
@@ -1166,7 +1134,6 @@ window.scrollTo(0, 0);
           <option>1:1 PT — 200,000원 / 10회 (25분)</option>
           <option>1:1 PT — 400,000원 / 10회 (50분)</option>
           <option>2:1 PT — 500,000원 / 10회 (50분)</option>
-          <option>원격 코칭 — 식단/인바디/자세교정(비대면)</option>
           <option>아직 모르겠어요 (상담 후 결정)</option>
         </select>
       </div>
@@ -1248,8 +1215,8 @@ var BA_INDEX_SLIDES = [
     ],
   },
   {
-    before: 'assets/contents/주00애프터.jpg',
-    after: 'assets/contents/주00비포.jpg',
+    before: 'assets/contents/주00비포.jpg',
+    after: 'assets/contents/주00애프터.jpg',
     member: '주00 회원님 · 여성 · 28세',
     infoSub: '3개월 체지방 감량 프로그램',
     stats: [
@@ -1563,6 +1530,14 @@ if (revNext) revNext.onclick = () => go(idx+1);
 buildDots();
 
 // ── FORM SUBMIT (FormSubmit) ──
+function formSubmitAlertMessage(raw) {
+  const s = (raw || '').toString();
+  if (/activation|activate form|needs activation|activate your form/i.test(s)) {
+    return 'FormSubmit에서 수신 메일함(스팸함 포함)으로 보낸 메일을 열고, "Activate Form" 링크를 한 번만 눌러 폼을 활성화해 주세요. 활성화 후에는 이 안내 없이 접수됩니다. 메일이 없으면 몇 분 뒤 다시 확인해 주세요.';
+  }
+  if (s && s.length < 500) return s;
+  return '전송에 실패했습니다. 잠시 후 다시 시도하거나 전화·카카오톡으로 연락 주세요.';
+}
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const formEl = e.target;
@@ -1598,15 +1573,15 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     }
     const ok = data.success === true || data.success === 'true';
     if (!ok) {
-      const msg = (data && data.message) || '전송이 완료되지 않았습니다.';
-      throw new Error(msg);
+      const failMsg = (data && data.message) || '전송이 완료되지 않았습니다.';
+      throw new Error(failMsg);
     }
     formEl.style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   } catch (err) {
     console.error(err);
     const m = (err && err.message) ? String(err.message) : '';
-    alert(m && m.length < 500 ? m : '전송에 실패했습니다. 잠시 후 다시 시도하거나 전화·카카오톡으로 연락 주세요.');
+    alert(formSubmitAlertMessage(m));
   } finally {
     btn.disabled = false;
   }
